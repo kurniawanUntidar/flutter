@@ -102,6 +102,21 @@ class MyApp extends StatelessWidget {
     return sum;
   }
   //==========================================================================================//
+  /*  DATA STRUCTURES  */
+  //List number = [1,2,3];
+  List <int> number = [1,2,3];
+  List <String> names = ["Andi", "Ubbe", "Ragnar", "Lagertha"];
+  void printNumber(){
+    for(int i = 0; i < number.length; i++){
+      print(number[i]);
+    }
+  }
+  void printName(){
+    for(int i = 0; i < names.length; i++){
+      print(names[i]);
+    }
+  }
+  //==========================================================================================//
   @override
   Widget build(BuildContext context) {
 
@@ -119,7 +134,9 @@ class MyApp extends StatelessWidget {
     // }
 
     greatPerson("Andi");
-    print(add(5, 3));
+    //print(add(5, 3));
+    printNumber();
+    //printName();
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(),
