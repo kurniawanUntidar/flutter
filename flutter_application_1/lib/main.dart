@@ -105,9 +105,23 @@ class MyApp extends StatelessWidget {
 
   //==========================================================================================//
   /*  DATA STRUCTURES  */
+  // 1. LIST -> ordered collections of elements, can have duplicates.
   //List number = [1,2,3];
   List<int> number = [1, 2, 3];
   List<String> names = ["Andi", "Ubbe", "Ragnar", "Lagertha"];
+  // 2. SET -> unordered collections of unique elements.
+  Set<String> uniqueName = {"Vistek", "Harald", "Fredy"};
+
+  // 3. MAP -> stored as key value pairs
+  Map user = {
+    'name': "Dwi Kurniawan",
+    'age': 36,
+    'height': 168,
+    'sex': "Male",
+  };
+  // Map can be accessed for each key
+  // user['name'] -> "Dwi Kurniawan"
+
   void printNumber() {
     for (int i = 0; i < number.length; i++) {
       print(number[i]);
@@ -140,6 +154,8 @@ class MyApp extends StatelessWidget {
     //print(add(5, 3));
     //printNumber();
     printName();
+    print(user['name']);
+    print(user['age']);
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(),
