@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(new MyApp());
 }
+
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
@@ -87,39 +88,41 @@ class MyApp extends StatelessWidget {
 
   */
   //basic function
-  void great(){
+  void great() {
     print("Hello World");
   }
 
   // function with parametes
-  void greatPerson(String name){
-    print("Hello "+name);
+  void greatPerson(String name) {
+    print("Hello " + name);
   }
 
   //function with return type
-  int add(int a, int b){
-    int sum= a+b;
+  int add(int a, int b) {
+    int sum = a + b;
     return sum;
   }
+
   //==========================================================================================//
   /*  DATA STRUCTURES  */
   //List number = [1,2,3];
-  List <int> number = [1,2,3];
-  List <String> names = ["Andi", "Ubbe", "Ragnar", "Lagertha"];
-  void printNumber(){
-    for(int i = 0; i < number.length; i++){
+  List<int> number = [1, 2, 3];
+  List<String> names = ["Andi", "Ubbe", "Ragnar", "Lagertha"];
+  void printNumber() {
+    for (int i = 0; i < number.length; i++) {
       print(number[i]);
     }
   }
-  void printName(){
-    for(int i = 0; i < names.length; i++){
+
+  void printName() {
+    for (int i = 0; i < names.length; i++) {
       print(names[i]);
     }
   }
+
   //==========================================================================================//
   @override
   Widget build(BuildContext context) {
-
     // if(age > 18){
     //   print("Your age is adult");
     // } else{
@@ -135,8 +138,8 @@ class MyApp extends StatelessWidget {
 
     greatPerson("Andi");
     //print(add(5, 3));
-    printNumber();
-    //printName();
+    //printNumber();
+    printName();
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(),
