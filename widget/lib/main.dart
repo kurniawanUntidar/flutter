@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -46,7 +48,7 @@ class MyApp extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20)),
                   child: Center(
                     child: Text(
-                      "Kurniawan",
+                       "Kurniawan",
                       style: TextStyle(
                         color: const Color.fromARGB(255, 196, 201, 230),
                         fontWeight: FontWeight.bold,
