@@ -15,28 +15,51 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
 //        backgroundColor: Colors.pinkAccent[200],
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 143, 4, 207),
+          backgroundColor: Color.fromRGBO(177, 5, 154, 1),
           title: Text("Widget App",
               style: TextStyle(
                   color: Colors.white70, fontWeight: FontWeight.bold)),
           leading: Icon(Icons.menu),
-          actions: [Icon(Icons.logout)],
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              height: 200,
-              width: 200,
-              color: Colors.blue,
+          actions: [
+            Icon(
+              Icons.account_box,
+              color: Colors.black,
             ),
-            Container(
-              height: 200,
-              width: 200,
-              color: Colors.green,
+            Icon(
+              Icons.logout,
+              color: Colors.black,
             )
           ],
+        ),
+
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  height: 200,
+                  width: 200,
+                  padding: EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 187, 13, 135),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Center(
+                    child: Text(
+                      "Kurniawan",
+                      style: TextStyle(
+                        color: const Color.fromARGB(255, 196, 201, 230),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )),
+              Container(
+                height: 200,
+                width: 200,
+                color: Colors.green,
+              )
+            ],
+          ),
         ),
       ),
     );
