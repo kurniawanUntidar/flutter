@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:user_input/pages/counter_page.dart';
+import 'package:stateful_widget/pages/counter_page.dart';
 
 void main() {
   runApp(UserInput());

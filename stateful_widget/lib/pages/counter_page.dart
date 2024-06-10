@@ -23,6 +23,12 @@ class _CounterPageState extends State<CounterPage> {
     });
   }
 
+  void _resetCounter() {
+    setState(() {
+      _counter = 0;
+    });
+  }
+
 //UI
 
   @override
@@ -43,7 +49,10 @@ class _CounterPageState extends State<CounterPage> {
         ),
       ),
       floatingActionButton: ElevatedButton(
-        onPressed: () => _counter = 0,
+        //onPressed: () => _counter = 0,
+        // nilai _counter berubah tapi state widget tidak berubah
+        onPressed: _resetCounter,
+        //nilai _counter berubah dan state widget berubah
         child: Text("Reset"),
       ),
     );
