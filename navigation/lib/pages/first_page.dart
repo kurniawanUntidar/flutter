@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:navigation/pages/home_page.dart';
+import 'package:navigation/pages/profile_page.dart';
+import 'package:navigation/pages/setting_page.dart';
 
 class FirstPage extends StatelessWidget {
-  const FirstPage({super.key});
+  FirstPage({super.key});
+
+  int _selectedIndex=0;
+
+  final List _pages = [
+    HomePage(),
+    ProfilePages(),
+    SettingPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +24,8 @@ class FirstPage extends StatelessWidget {
         ),
         backgroundColor: Colors.blue,
       ),
+
+      /*
       // Navigator on side left
       drawer: Drawer(
         backgroundColor: Color.fromARGB(255, 107, 155, 238),
@@ -50,7 +62,8 @@ class FirstPage extends StatelessWidget {
             )
           ],
         ),
-      ),
+      ),*/
+      body: _pages[0],
       bottomNavigationBar: BottomNavigationBar(
         items: [
           //home
