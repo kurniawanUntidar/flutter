@@ -3,10 +3,21 @@ import 'package:navigation/pages/home_page.dart';
 import 'package:navigation/pages/profile_page.dart';
 import 'package:navigation/pages/setting_page.dart';
 
-class FirstPage extends StatelessWidget {
+class FirstPage extends StatefulWidget {
   FirstPage({super.key});
 
-  int _selectedIndex=0;
+  @override
+  State<FirstPage> createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  int _selectedIndex = 0;
+
+  void _navigatedBottomBar(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   final List _pages = [
     HomePage(),
@@ -63,7 +74,7 @@ class FirstPage extends StatelessWidget {
           ],
         ),
       ),*/
-      body: _pages[0],
+      body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: [
           //home
@@ -82,8 +93,10 @@ class FirstPage extends StatelessWidget {
             icon: Icon(Icons.settings),
             label: 'Setting',
           ),
-
-      ]),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _navigatedBottomBar,
+      ),
       /*
       body: Center(
         child: ElevatedButton(
