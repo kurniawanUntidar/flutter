@@ -22,6 +22,11 @@ class _CounterPageState extends State<CounterPage> {
       _counter++;
     });
   }
+  void _decrementState(){
+    setState(() {
+      _counter--;
+    });
+  }
 
   void _resetCounter() {
     setState(() {
@@ -51,7 +56,7 @@ class _CounterPageState extends State<CounterPage> {
       floatingActionButton: ElevatedButton(
         //onPressed: () => _counter = 0,
         // nilai _counter berubah tapi state widget tidak berubah
-        onPressed: _resetCounter,
+        onPressed:_resetCounter,
         //nilai _counter berubah dan state widget berubah
         child: Text("Reset"),
       ),
