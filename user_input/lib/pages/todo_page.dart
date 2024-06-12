@@ -10,8 +10,12 @@ class ToDoPage extends StatefulWidget {
 class _ToDoPageState extends State<ToDoPage> {
 //text editing controller to get access to what the user typed
   TextEditingController myController = TextEditingController();
+  String StringName = "";
+
   void greetUser() {
-    print(myController.text);
+    setState(() {
+      StringName = "Hello, "+myController.text;
+    });
   }
 
   @override
@@ -31,11 +35,12 @@ class _ToDoPageState extends State<ToDoPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Text(StringName),
                   TextField(
                     controller: myController,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: "Input your Name"),
+                        hintText: "Text your Name"),
                   ),
                   ElevatedButton(onPressed: greetUser, child: Text("Tap"))
                 ],
