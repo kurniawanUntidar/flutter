@@ -158,6 +158,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  flutter_image_utilities:
+    dependency: "direct main"
+    description:
+      name: flutter_image_utilities
+      sha256: "813ec457bdcc1d6c5f3c671cfacd53fa954f22cc23d06aa3a7aa340c82a280b1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
