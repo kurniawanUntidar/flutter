@@ -1,0 +1,98 @@
+Untuk mencari persamaan antara dua gambar, Anda dapat menggunakan teknik pengolahan citra atau teknik komputasi visual. Di Flutter, Anda dapat menggunakan paket seperti image/image.dart untuk melakukan pemrosesan gambar.
+
+Berikut contoh bagaimana Anda bisa menentukan apakah kedua gambar sama atau tidak menggunakan Dart di Flutter:
+
+```dart
+import 'dart:io';
+import 'package:image/image.dart';
+
+void main() {
+  File file1 = File('path_to_image1.jpg');
+  File file2 = File('path_to_image2.jpg');
+
+  // Membaca kedua file gambar
+  List<int> bytes1 = file1.readAsBytesSync();
+  List<int> bytes2 = file2.readAsBytesSync();
+
+  // Mendekode kedua gambar menjadi objek Image
+  Image img1 = decodeImage(Uint8List.fromList(bytes1));
+  Image img2 = decodeImage(Uint8List.fromList(bytes2));
+
+  // Membandingkan pixel-by-pixel dari kedua gambar
+  bool areEqual = compareImages(img1, img2);
+
+ if (areEqual) {
+    print('Kedua gambar sama');
+ } else {
+    print('Kedua gambar berbeda');
+ }
+}
+
+bool compareImages(Image img1, Image img2) {
+ if (img1.width != img2.width || img1.height != img2.height) {
+    return false;
+ }
+
+ for (int y=0; y < img1.height; y++) {
+    for (int x=0; x <img1.width; x++) { 
+      int pixelColorImg1= img.getPixel(x,y);
+      int pixelColorImg12=img.getPixel(x,y);
+      
+      if(pixelColorImg11!=pixelColorImg22){
+        return false;
+      }
+   }
+}
+return true;
+}
+```
+
+Pada contoh di atas, kita membandingkan dua buah image secara pixel-by-pixel dan mengembalikan nilai boolean apakah kedua image tersebut sama atau tidak.
+
+Anda juga dapat menggunakan metode lain seperti hashing untuk mencocokkan kecocokan antara dua buah image. Tetapi baiknya tambahkan fitur yang memungkinkan pengguna melihat perbedaan jika ada perbedaan pada dua buah image tersebut.
+
+
+
+void main() {
+ File file1 = File(&#39;path_to_image1.jpg&#39;);
+ File file2 = File(&#39;path_to_image2.jpg&#39;);
+
+ // Membaca kedua file gambar
+ List&lt;int&gt; bytes1 = file1.readAsBytesSync();
+ List&lt;int&gt; bytes2 = file2.readAsBytesSync();
+
+ // Mendekode kedua gambar menjadi objek Image
+ Image img1 = decodeImage(Uint8List.fromList(bytes1));
+ Image img2 = decodeImage(Uint8List.fromList(bytes2));
+
+ // Menghitung histogram untuk kedua gambar
+ Map&lt;int, int&gt; histImg1 = calculateColorHistogram(img11);
+ Map&lt;i,nt  int&gt histImg12=calculateColorHistogram(img22);
+
+ // Menghitung persentase kesamaan berdasarkan histogram
+ double similarityPercentage=calculateSimilarityPercentage(histImg11,histImg12);
+
+ print(&#39;% Kesamaan antara kedua gambar: $similarityPercentage %&#3&9);
+}
+
+Map&lt;i,nt  i,n t&gt calculateColorHistogram(Image img) {
+ Map<int, int> histogram=
+      <i,n t  in>t{};
+   for (i nt y=0;<img.height;y++) { 
+for (int x=0;x<img.width;x++) { 
+     int pixel=img.getPixel(x,y); 
+     if(histogram.containsKey(pixel)){histogram[pixel]++;} else{histogram[pixel]=1;} } }
+return historam;
+}
+
+double calculateSimilarityPercentage(Map<int,int> hist1,Map<int,int> hist2){
+ double sumDifference=.0;
+ for(int key in h ist ogram.keys){ 
+sumDifference+= ((histo gram[ke y]-h istog ram[key])*(histogram[key]-hi stog ram[k ey]));}
+sumDifference/=(ima ge.wid th*imag e.heig ht); return 100-sumDiffe renc e;
+}
+```
+
+Pada contoh di atas, kami menghitung histogram untuk masing-masing gambar dan kemudian menghitung persentase kesamaan berdasarkan perbedaan distribusi warna dalam histogram. Semakin kecil perbedaan tersebut, semakin besar nilai similarnya.
+
+Anda dapat menyesuaikan metode ini sesuai dengan kebutuhan Anda dan memperhatikan bahwa hasilnya mungkin akan bervariasi tergantung pada kompleksitas dan variasi dalam kumpulan data gambarnya.

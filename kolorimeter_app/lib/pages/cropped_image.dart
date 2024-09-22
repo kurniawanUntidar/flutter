@@ -1,7 +1,11 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
+//import 'package:flutter_image_utilities/flutter_image_utilities.dart';
+//import 'package:image/src/image/image.dart';
+//import 'package:image/image.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class CroppedImage extends StatefulWidget {
@@ -18,6 +22,7 @@ class _CroppedImageState extends State<CroppedImage> {
     try {
       final params = SaveFileDialogParams(sourceFilePath: imageToSave.path);
       final finalPath = await FlutterFileDialog.saveFile(params: params);
+      //final finalPath = await FlutterImageUtilities.getImageProperties(imageFile);
       if (finalPath != null) {
         message = "Save to disk";
       }
@@ -30,6 +35,16 @@ class _CroppedImageState extends State<CroppedImage> {
       ));
     }
   }
+
+  // void compare(File gambar1, File gambar2) async {
+  //   //-----membaca kedua gambar sebagai bytes
+  //   List<int> bytes1 = gambar1.readAsBytesSync();
+  //   List<int> bytes2 = gambar2.readAsBytesSync();
+
+  //   //---mengkode kedua gambar menjadi object image
+  //   Image img1 = decodeImage(Uint8List.fromList(bytes1));
+  //   Image img2 = decodeImage(Uint8List.fromList(bytes2));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +67,24 @@ class _CroppedImageState extends State<CroppedImage> {
                 ),
               )),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  saveImage(widget.image);
-                },
-                child: Text(
-                  'Save',
-                  style: TextStyle(color: const Color.fromARGB(255, 32, 2, 2)),
-                ))
+            Row(
+              children: [
+                ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Analize',
+                      style: TextStyle(color: const Color.fromARGB(255, 32, 2, 2)),
+                    )),
+                ElevatedButton(
+                    onPressed: () {
+                      saveImage(widget.image);
+                    },
+                    child: Text(
+                      'Save',
+                      style: TextStyle(color: const Color.fromARGB(255, 32, 2, 2)),
+                    )),
+              ],
+            )
           ],
         ),
       ),
