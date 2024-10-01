@@ -58,14 +58,27 @@ class _CroppedImageState extends State<CroppedImage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(5),
-              child: InteractiveViewer(
+              padding: const EdgeInsets.all(50),
+              child: Container(
+                width: 120,
+                height: 120,
+                clipBehavior: Clip.antiAlias,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: Image(
+                  image: FileImage(File(widget.image.path)),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            /*child: InteractiveViewer(
                   child: Image(
                 image: FileImage(
                   File(widget.image.path),
                 ),
               )),
-            ),
+            ),*/
             Center(
               child: Column(
                 children: [
@@ -73,7 +86,8 @@ class _CroppedImageState extends State<CroppedImage> {
                       onPressed: () {},
                       child: Text(
                         'Analize',
-                        style: TextStyle(color: const Color.fromARGB(255, 32, 2, 2)),
+                        style: TextStyle(
+                            color: const Color.fromARGB(255, 32, 2, 2)),
                       )),
                   ElevatedButton(
                       onPressed: () {
@@ -81,7 +95,8 @@ class _CroppedImageState extends State<CroppedImage> {
                       },
                       child: Text(
                         'Save',
-                        style: TextStyle(color: const Color.fromARGB(255, 32, 2, 2)),
+                        style: TextStyle(
+                            color: const Color.fromARGB(255, 32, 2, 2)),
                       )),
                 ],
               ),
