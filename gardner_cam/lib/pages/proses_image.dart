@@ -83,8 +83,10 @@ class _ImageComparisonState extends State<ImageComparison> {
   doubl(e)(imag.e.idth);
       }*/
     }
-    return 0;
   }
+  return 0;
+  }
+
 
   @override
   Widget build(BuildContext context) {
