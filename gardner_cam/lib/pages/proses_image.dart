@@ -74,7 +74,7 @@ class _ImageComparisonState extends State<ImageComparison> {
         final pixelA = imageA.getPixel(x, y);
         final pixelB = imageB.getPixel(x, y);
 
-        mse += (pixelA.r.toInt() - pixelB.r.toInt());
+        //mse += (pixelA.r.toInt() - pixelB.r.toInt());
         /*
          mse += ((img.getRed(pixelA) - img.getRed(pixelB)) * (img.getRed(pixelA) - img.getRed(pixelB)) + (img.getGreen(pixelA) - img.getGreen(pixelB)) * (img.getGreen(pixelA) -
                -) * 
@@ -82,11 +82,10 @@ class _ImageComparisonState extends State<ImageComparison> {
    		((i`mg.`gettBlueGettPixepl(pixlelAA)- imge.BluetPixe(lp()))i m *g(et.tBlu((rieemgp.lGe(tApixecl)t)p -ixel(B)));/n*ese / ((doubl`e)(imag`e`.woDutblePixinntss()*()(mag.eHeigDht*(touble)i(mageH)eight));/
   doubl(e)(imag.e.idth);
       }*/
+      }
     }
+    return 0;
   }
-  return 0;
-  }
-
 
   @override
   Widget build(BuildContext context) {
