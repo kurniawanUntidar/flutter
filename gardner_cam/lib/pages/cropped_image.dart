@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
-import 'package:image_compare/image_compare.dart';
+import 'package:gardner_cam/pages/compare_image.dart';
+//import 'package:image/image.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class CroppedImage extends StatefulWidget {
@@ -33,22 +36,6 @@ class _CroppedImageState extends State<CroppedImage> {
     }
   }
 
-  void compare(CroppedFile imageToCompare) async {
-    var assetImage = [
-      Image.asset('assets/images/1.jpg'),
-      File('assets/images/2.jpg'),
-      File('assets/images/3.jpg'),
-      File('assets/images/4.jpg'),
-      File('assets/images/5.jpg'),
-    ];
-    var std = Image.asset('assets/images/1.jpg');
-
-    var chiSquareDistace = await compareImages(
-        src1: imageToCompare.readAsBytes(),
-        src2: std,
-        algorithm: ChiSquareDistanceHistogram());
-    print('Chi Square Histogram difference : ${chiSquareDistace * 100}%');
-  }
   // void compare(File gambar1, File gambar2) async {
   //   //-----membaca kedua gambar sebagai bytes
   //   List<int> bytes1 = gambar1.readAsBytesSync();
@@ -82,6 +69,21 @@ class _CroppedImageState extends State<CroppedImage> {
                 ),
                 child: Image(
                   image: FileImage(File(widget.image.path)),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(50),
+              child: Container(
+                width: 120,
+                height: 120,
+                clipBehavior: Clip.antiAlias,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                child: Image(
+                  image: AssetImage('assets/images/1.jpg'),
                   fit: BoxFit.cover,
                 ),
               ),

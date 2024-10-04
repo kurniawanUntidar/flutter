@@ -1,4 +1,4 @@
-import 'dart:io';
+/*import 'dart:io';
 import 'package:image/image.dart';
 import 'package:image_compare/image_compare.dart';
 
@@ -89,4 +89,44 @@ void main(List<String> arguments) async {
   );
 
   assetResults.forEach((e) => print('Difference: ${e * 100}%'));
+}*/
+
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:flutter/material.dart';
+import 'package:gardner_cam/pages/cropped_image.dart';
+import 'package:image/image.dart';
+import 'package:image_compare/image_compare.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:flutter/services.dart' show rootBundle;
+
+Future<List<int>> getImageAsList(String imagePath) async {
+  ByteData data = await rootBundle.load(imagePath);
+  List<int> bytes = data.buffer.asUint8List();
+  return bytes;
+}
+
+void compare(CroppedFile imageToCompare) async {
+  var assetImage = [
+    // Image.asset('assets/images/1.jpg'),
+    File('assets/images/2.jpg'),
+    File('assets/images/3.jpg'),
+    File('assets/images/4.jpg'),
+    File('assets/images/5.jpg'),
+  ];
+  var std = AssetImage('assets/images/2.jpg');
+  List<int> stdBytes = await getImageAsList('assets/images/1.jpg');
+  List<int> imageBase64 = await imageToCompare.readAsBytes();
+  // String imageAsString = base64Encode(imageBase64);
+  // Uint8List uint8list = base64Decode(imageAsString);
+  //Image imageTest = Image.memory(uint8list);
+  //var byte1 = await imageToCompare.readAsBytes();
+
+  var chiSquareDistace = await compareImages(
+      src1: decodeImage(imageBase64),
+      src2: decodeImage(stdBytes),
+      algorithm: ChiSquareDistanceHistogram());
+  print('Chi Square Histogram difference : ${chiSquareDistace * 100}%');
+
+  //return (chiSquareDistace * 100).toStringAsPrecision(2);
 }
