@@ -106,28 +106,39 @@ Future<List<int>> getImageAsList(String imagePath) async {
   return bytes;
 }
 
-Future<String> compare(CroppedFile imageToCompare) async {
-  var assetImage = [
-    // Image.asset('assets/images/1.jpg'),
-    File('assets/images/2.jpg'),
-    File('assets/images/3.jpg'),
-    File('assets/images/4.jpg'),
-    File('assets/images/5.jpg'),
-  ];
-  var std = AssetImage('assets/images/2.jpg');
-  List<int> stdBytes = await getImageAsList('assets/images/1.jpg');
+Future<String> compare(CroppedFile imageToCompare, int stdNo) async {
+
+    String std1= 'assets/images/1.jpg';
+    String std2= 'assets/images/2.jpg';
+    String std3= 'assets/images/3.jpg';
+    String std4= 'assets/images/4.jpg';
+    String std5= 'assets/images/5.jpg';
+    List<int> stdBytes=[];
+
+  switch(stdNo){
+    case 1:{stdBytes = await getImageAsList('assets/images/1.jpg');}      
+      break;
+    case 2:{stdBytes = await getImageAsList('assets/images/2.jpg');}      
+      break;
+    case 3:{stdBytes = await getImageAsList('assets/images/3.jpg');}      
+      break;
+    case 4:{stdBytes = await getImageAsList('assets/images/4.jpg');}      
+      break;
+    case 5:{stdBytes = await getImageAsList('assets/images/5.jpg');}      
+      break;
+    };
+
+  //  List<int> stdBytes = await getImageAsList('assets/images/1.jpg');
+  
   List<int> imageBase64 = await imageToCompare.readAsBytes();
-  // String imageAsString = base64Encode(imageBase64);
-  // Uint8List uint8list = base64Decode(imageAsString);
-  //Image imageTest = Image.memory(uint8list);
-  //var byte1 = await imageToCompare.readAsBytes();
 
   var chiSquareDistace = await compareImages(
       src1: decodeImage(imageBase64),
       src2: decodeImage(stdBytes),
       algorithm: ChiSquareDistanceHistogram());
+  double retval = chiSquareDistace*100;
 
-  print('Chi Square Histogram difference : ${chiSquareDistace * 100}%');
-  return chiSquareDistace.toStringAsPrecision(2);
+ // print('Chi Square Histogram difference : ${chiSquareDistace * 100}%');
+  return retval.toStringAsPrecision(4);
   //return (chiSquareDistace * 100).toStringAsPrecision(2);
 }
