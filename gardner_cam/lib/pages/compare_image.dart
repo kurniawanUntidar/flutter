@@ -106,7 +106,7 @@ Future<List<int>> getImageAsList(String imagePath) async {
   return bytes;
 }
 
-void compare(CroppedFile imageToCompare) async {
+Future<String> compare(CroppedFile imageToCompare) async {
   var assetImage = [
     // Image.asset('assets/images/1.jpg'),
     File('assets/images/2.jpg'),
@@ -126,7 +126,8 @@ void compare(CroppedFile imageToCompare) async {
       src1: decodeImage(imageBase64),
       src2: decodeImage(stdBytes),
       algorithm: ChiSquareDistanceHistogram());
-  print('Chi Square Histogram difference : ${chiSquareDistace * 100}%');
 
+  print('Chi Square Histogram difference : ${chiSquareDistace * 100}%');
+  return chiSquareDistace.toStringAsPrecision(2);
   //return (chiSquareDistace * 100).toStringAsPrecision(2);
 }

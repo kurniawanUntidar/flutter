@@ -19,6 +19,7 @@ class CroppedImage extends StatefulWidget {
 }
 
 class _CroppedImageState extends State<CroppedImage> {
+  String val = '';
   void saveImage(CroppedFile imageToSave) async {
     String? message;
     try {
@@ -66,8 +67,8 @@ class _CroppedImageState extends State<CroppedImage> {
               ),
             ),
             ElevatedButton(
-                onPressed: () {
-                  compare(widget.image);
+                onPressed: () async {
+                  val = await compare(widget.image);
                 },
                 child: Text('Analyze')),
             Padding(
@@ -89,7 +90,7 @@ class _CroppedImageState extends State<CroppedImage> {
                         border: Border.all(),
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: Text('100%'),
+                      child: Text('$val%'),
                     ),
                   ],
                 ),
