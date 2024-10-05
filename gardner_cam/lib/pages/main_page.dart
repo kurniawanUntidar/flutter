@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:gardner_cam/pages/cropped_image.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -68,8 +67,8 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-        actions: [Icon(Icons.settings)],
+      appBar: AppBar(
+        actions: [],
         flexibleSpace: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -104,7 +103,7 @@ class _MainPageState extends State<MainPage> {
         centerTitle: true,
         foregroundColor: Colors.white,
       ),
-    body: Center(
+      body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -134,7 +133,7 @@ class _MainPageState extends State<MainPage> {
             ),
           ],
         ),
-      ),  
+      ),
     );
   }
 }
