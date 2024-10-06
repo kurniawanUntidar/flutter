@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gardner_cam/pages/main_page.dart';
 
 void main() {
@@ -10,9 +11,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MainPage(),
+    return ScreenUtilInit(
+      designSize: Size(720, 1280),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: MainPage(),
+      ),
     );
   }
 }

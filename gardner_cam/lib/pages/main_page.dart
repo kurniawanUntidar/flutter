@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gardner_cam/pages/cropped_image.dart';
+import 'package:gardner_cam/pages/analyze_image.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -28,7 +28,7 @@ class _MainPageState extends State<MainPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: ((context) => CroppedImage(
+          builder: ((context) => analyzeImage(
                 image: croppedImage,
               )),
         ),

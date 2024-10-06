@@ -91,10 +91,7 @@ void main(List<String> arguments) async {
   assetResults.forEach((e) => print('Difference: ${e * 100}%'));
 }*/
 
-import 'dart:io';
 import 'dart:typed_data';
-import 'package:flutter/material.dart';
-import 'package:gardner_cam/pages/cropped_image.dart';
 import 'package:image/image.dart';
 import 'package:image_compare/image_compare.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -107,38 +104,53 @@ Future<List<int>> getImageAsList(String imagePath) async {
 }
 
 Future<String> compare(CroppedFile imageToCompare, int stdNo) async {
+  String std1 = 'assets/images/1.jpg';
+  String std2 = 'assets/images/2.jpg';
+  String std3 = 'assets/images/3.jpg';
+  String std4 = 'assets/images/4.jpg';
+  String std5 = 'assets/images/5.jpg';
+  List<int> stdBytes = [];
 
-    String std1= 'assets/images/1.jpg';
-    String std2= 'assets/images/2.jpg';
-    String std3= 'assets/images/3.jpg';
-    String std4= 'assets/images/4.jpg';
-    String std5= 'assets/images/5.jpg';
-    List<int> stdBytes=[];
-
-  switch(stdNo){
-    case 1:{stdBytes = await getImageAsList('assets/images/1.jpg');}      
+  switch (stdNo) {
+    case 1:
+      {
+        stdBytes = await getImageAsList('assets/images/1.jpg');
+      }
       break;
-    case 2:{stdBytes = await getImageAsList('assets/images/2.jpg');}      
+    case 2:
+      {
+        stdBytes = await getImageAsList('assets/images/2.jpg');
+      }
       break;
-    case 3:{stdBytes = await getImageAsList('assets/images/3.jpg');}      
+    case 3:
+      {
+        stdBytes = await getImageAsList('assets/images/3.jpg');
+      }
       break;
-    case 4:{stdBytes = await getImageAsList('assets/images/4.jpg');}      
+    case 4:
+      {
+        stdBytes = await getImageAsList('assets/images/4.jpg');
+      }
       break;
-    case 5:{stdBytes = await getImageAsList('assets/images/5.jpg');}      
+    case 5:
+      {
+        stdBytes = await getImageAsList('assets/images/5.jpg');
+      }
       break;
-    };
+  }
+  ;
 
   //  List<int> stdBytes = await getImageAsList('assets/images/1.jpg');
-  
+
   List<int> imageBase64 = await imageToCompare.readAsBytes();
 
   var chiSquareDistace = await compareImages(
       src1: decodeImage(imageBase64),
       src2: decodeImage(stdBytes),
-      algorithm: ChiSquareDistanceHistogram());
-  double retval = chiSquareDistace*100;
+      algorithm: EuclideanColorDistance(ignoreAlpha: true));
+  double retval = chiSquareDistace * 100;
 
- // print('Chi Square Histogram difference : ${chiSquareDistace * 100}%');
+  // print('Chi Square Histogram difference : ${chiSquareDistace * 100}%');
   return retval.toStringAsPrecision(4);
   //return (chiSquareDistace * 100).toStringAsPrecision(2);
 }
