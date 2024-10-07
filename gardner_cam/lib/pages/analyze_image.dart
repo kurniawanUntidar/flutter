@@ -84,7 +84,7 @@ class _analyzeImageState extends State<analyzeImage> {
           children: [
             Center(
               child: Container(
-                margin: EdgeInsets.all(12),
+                margin: EdgeInsets.all(12.h),
                 width: 250.w,
                 height: 250.h,
                 clipBehavior: Clip.antiAlias,
@@ -109,12 +109,12 @@ class _analyzeImageState extends State<analyzeImage> {
                   pencetTombol();
                 },
                 label: Text('Analyze')),
-            Padding(padding: EdgeInsets.all(8)),
+            Padding(padding: EdgeInsets.symmetric(vertical: 8.h,horizontal: 8.w)),
             //=======================================list 1
             Container(
-              margin: EdgeInsets.all(3),
+              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 10.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.all(3),
+              padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 4.w),
               child: Row(
                 children: [
                   Container(
@@ -138,9 +138,9 @@ class _analyzeImageState extends State<analyzeImage> {
             ),
             //=======================================list 2
             Container(
-              margin: EdgeInsets.all(3),
+              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 10.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.all(3),
+              padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 4.w),
               child: Row(
                 children: [
                   Container(
@@ -164,9 +164,9 @@ class _analyzeImageState extends State<analyzeImage> {
             ),
             //===============list 3
             Container(
-              margin: EdgeInsets.all(3),
+              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 10.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.all(3),
+              padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 4.w),
               child: Row(
                 children: [
                   Container(
@@ -191,9 +191,9 @@ class _analyzeImageState extends State<analyzeImage> {
 
             //===============list 4
             Container(
-              margin: EdgeInsets.all(3),
+              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 10.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.all(3),
+              padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 4.w),
               child: Row(
                 children: [
                   Container(
@@ -218,9 +218,9 @@ class _analyzeImageState extends State<analyzeImage> {
 
             //===============list 5
             Container(
-              margin: EdgeInsets.all(3),
+              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 10.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.all(3),
+              padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 4.w),
               child: Row(
                 children: [
                   Container(
@@ -242,7 +242,7 @@ class _analyzeImageState extends State<analyzeImage> {
                   color: Color.fromARGB(255, 241, 216, 144),
                   borderRadius: BorderRadius.circular(12.r)),
             ),
-            Padding(padding: EdgeInsets.all(8)),
+            Padding(padding: EdgeInsets.symmetric(vertical: 8.h,horizontal: 8.w)),
 
             ElevatedButton.icon(
                 icon: Icon(Icons.picture_as_pdf_outlined),
