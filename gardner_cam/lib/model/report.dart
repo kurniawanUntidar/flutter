@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:gardner_cam/model/customer.dart';
 import 'package:gardner_cam/model/supplier.dart';
+import 'package:image/image.dart';
 
 class report {
   final reportInfo info;
@@ -32,10 +33,11 @@ class reportInfo {
 }
 
 class reportItem {
+  final Image stdImage;
   final String no;
   final String description;
   final String differences;
 
   const reportItem(
-      {required this.no, required this.description, required this.differences});
+      {required this.stdImage, required this.no, required this.description, required this.differences});
 }

@@ -114,11 +114,12 @@ class PdfInvoiceApi {
       );
 
   static Widget buildInvoice(report invoice) {
-    final headers = ['No', 'Description', 'Differences'];
+    final headers = ['No','Standard', 'Description', 'Differences'];
     final data = invoice.items.map((item) {
       // final total = item.unitPrice * item.quantity * (1 + item.vat);
 
       return [
+        item.stdImage,
         item.no,
         item.description,
         item.differences,
@@ -136,6 +137,7 @@ class PdfInvoiceApi {
         0: Alignment.centerLeft,
         1: Alignment.centerRight,
         2: Alignment.centerRight,
+        3: Alignment.centerRight,
       },
     );
   }

@@ -10,7 +10,6 @@ import 'package:gardner_cam/model/customer.dart';
 import 'package:gardner_cam/model/report.dart';
 import 'package:gardner_cam/model/supplier.dart';
 import 'package:gardner_cam/pages/compare_image.dart';
-import 'package:gardner_cam/pages/pdf_page.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class analyzeImage extends StatefulWidget {
@@ -96,30 +95,35 @@ class _analyzeImageState extends State<analyzeImage> {
       ),
       items: [
         reportItem(
-            no: '1',
-            description:
+          stdImage: await getImageAsList('assets/images/1.jpg'),
+          no: '1',
+          description:
                 'Compare With Standard Color Number 1 has differences :',
-            differences: val1),
+          differences: val1),
         reportItem(
-            no: '2',
-            description:
+          stdImage: await getImageAsList('assets/images/2.jpg'),
+          no: '2',
+          description:
                 'Compare With Standard Color Number 2 has differences :',
-            differences: val2),
+          differences: val2),
         reportItem(
+          stdImage: await getImageAsList('assets/images/3.jpg'),
             no: '3',
             description:
                 'Compare With Standard Color Number 3 has differences :',
             differences: val3),
         reportItem(
-            no: '4',
-            description:
+          stdImage: await getImageAsList('assets/images/4.jpg'),
+          no: '4',
+          description:
                 'Compare With Standard Color Number 4 has differences :',
-            differences: val4),
+          differences: val4),
         reportItem(
-            no: '5',
-            description:
+          stdImage: await getImageAsList('assets/images/5.jpg'),
+          no: '5',
+          description:
                 'Compare With Standard Color Number 5 has differences :',
-            differences: val5),
+          differences: val5),
       ],
     );
 
