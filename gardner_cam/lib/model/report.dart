@@ -3,13 +3,13 @@ import 'dart:ffi';
 import 'package:gardner_cam/model/customer.dart';
 import 'package:gardner_cam/model/supplier.dart';
 
-class Invoice {
-  final InvoiceInfo info;
+class report {
+  final reportInfo info;
   final Supplier supplier;
   final Customer customer;
-  final List<InvoiceItem> items;
+  final List<reportItem> items;
 
-  const Invoice({
+  const report({
     required this.info,
     required this.supplier,
     required this.customer,
@@ -17,13 +17,13 @@ class Invoice {
   });
 }
 
-class InvoiceInfo {
+class reportInfo {
   final String description;
   final String number;
   final DateTime date;
   final DateTime dueDate;
 
-  const InvoiceInfo({
+  const reportInfo({
     required this.description,
     required this.number,
     required this.date,
@@ -31,11 +31,11 @@ class InvoiceInfo {
   });
 }
 
-class InvoiceItem {
+class reportItem {
   final String no;
   final String description;
-  final double differences;
+  final String differences;
 
-  const InvoiceItem(
+  const reportItem(
       {required this.no, required this.description, required this.differences});
 }

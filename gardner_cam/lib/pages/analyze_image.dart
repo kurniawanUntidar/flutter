@@ -1,10 +1,14 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gardner_cam/api/pdf_api.dart';
+import 'package:gardner_cam/api/pdf_invoice_api.dart';
 import 'package:gardner_cam/main.dart';
+import 'package:gardner_cam/model/customer.dart';
+import 'package:gardner_cam/model/report.dart';
+import 'package:gardner_cam/model/supplier.dart';
 import 'package:gardner_cam/pages/compare_image.dart';
 import 'package:gardner_cam/pages/pdf_page.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -70,6 +74,60 @@ class _analyzeImageState extends State<analyzeImage> {
     }
   }
 
+  void pdfPage1() async {
+    final date = DateTime.now();
+    final dueDate = date.add(Duration(days: 7));
+
+    final Report = report(
+      supplier: Supplier(
+        name: 'GARDNER CAM APP REPORT',
+        address: 'Laboratorium Teknik Sipil Universitas Tidar Magelang',
+        paymentInfo: 'https://elab.untidar.ac.id',
+      ),
+      customer: Customer(
+        name: 'Nama User',
+        address: 'Alamat user',
+      ),
+      info: reportInfo(
+        date: date,
+        dueDate: dueDate,
+        description: 'ASTM-C40 using Eucladian Color Distance Algorithm',
+        number: '${DateTime.now().year}-9999',
+      ),
+      items: [
+        reportItem(
+            no: '1',
+            description:
+                'Compare With Standard Color Number 1 has differences :',
+            differences: val1),
+        reportItem(
+            no: '2',
+            description:
+                'Compare With Standard Color Number 2 has differences :',
+            differences: val2),
+        reportItem(
+            no: '3',
+            description:
+                'Compare With Standard Color Number 3 has differences :',
+            differences: val3),
+        reportItem(
+            no: '4',
+            description:
+                'Compare With Standard Color Number 4 has differences :',
+            differences: val4),
+        reportItem(
+            no: '5',
+            description:
+                'Compare With Standard Color Number 5 has differences :',
+            differences: val5),
+      ],
+    );
+
+    final pdfFile = await PdfInvoiceApi.generate(Report);
+
+    PdfApi.openFile(pdfFile);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,12 +167,13 @@ class _analyzeImageState extends State<analyzeImage> {
                   pencetTombol();
                 },
                 label: Text('Analyze')),
-            Padding(padding: EdgeInsets.symmetric(vertical: 8.h,horizontal: 8.w)),
+            Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w)),
             //=======================================list 1
             Container(
-              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 10.w),
+              margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 4.w),
+              padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
               child: Row(
                 children: [
                   Container(
@@ -138,9 +197,9 @@ class _analyzeImageState extends State<analyzeImage> {
             ),
             //=======================================list 2
             Container(
-              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 10.w),
+              margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 4.w),
+              padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
               child: Row(
                 children: [
                   Container(
@@ -164,9 +223,9 @@ class _analyzeImageState extends State<analyzeImage> {
             ),
             //===============list 3
             Container(
-              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 10.w),
+              margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 4.w),
+              padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
               child: Row(
                 children: [
                   Container(
@@ -191,9 +250,9 @@ class _analyzeImageState extends State<analyzeImage> {
 
             //===============list 4
             Container(
-              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 10.w),
+              margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 4.w),
+              padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
               child: Row(
                 children: [
                   Container(
@@ -218,9 +277,9 @@ class _analyzeImageState extends State<analyzeImage> {
 
             //===============list 5
             Container(
-              margin:EdgeInsets.symmetric(vertical: 4.h,horizontal: 10.w),
+              margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 4.w),
+              padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
               child: Row(
                 children: [
                   Container(
@@ -242,13 +301,14 @@ class _analyzeImageState extends State<analyzeImage> {
                   color: Color.fromARGB(255, 241, 216, 144),
                   borderRadius: BorderRadius.circular(12.r)),
             ),
-            Padding(padding: EdgeInsets.symmetric(vertical: 8.h,horizontal: 8.w)),
+            Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w)),
 
             ElevatedButton.icon(
                 icon: Icon(Icons.picture_as_pdf_outlined),
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
                 onPressed: () async {
-                  pdfPage();
+                  pdfPage1();
                 },
                 label: Text('Save Report')),
 
