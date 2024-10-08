@@ -33,11 +33,15 @@ class reportInfo {
 }
 
 class reportItem {
-  final Image stdImage;
+  final List<int> stdImage;
   final String no;
   final String description;
   final String differences;
 
   const reportItem(
-      {required this.stdImage, required this.no, required this.description, required this.differences});
+      {
+        required this.stdImage, 
+        required this.no, 
+        required this.description, 
+        required this.differences});
 }

@@ -5,7 +5,7 @@
     <application
         android:label="gardner_cam"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/play_store_512">
         <activity
             android:name=".MainActivity"
             android:exported="true"
