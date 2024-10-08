@@ -9,25 +9,25 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 
 class PdfInvoiceApi {
-  static Future<File> generate(report Report) async {
+  static Future<File> generate(Report reportPdf) async {
     final pdf = Document();
 
     pdf.addPage(MultiPage(
       build: (context) => [
-        buildHeader(Report),
+        buildHeader(reportPdf),
         SizedBox(height: 3 * PdfPageFormat.cm),
-        buildTitle(Report),
-        buildInvoice(Report),
+        buildTitle(reportPdf),
+        buildInvoice(reportPdf),
         Divider(),
-        buildTotal(Report),
+        buildTotal(reportPdf),
       ],
-      footer: (context) => buildFooter(Report),
+      footer: (context) => buildFooter(reportPdf),
     ));
 
     return PdfApi.saveDocument(name: 'gardnerCam_report.pdf', pdf: pdf);
   }
 
-  static Widget buildHeader(report invoice) => Column(
+  static Widget buildHeader(Report invoice) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 1 * PdfPageFormat.cm),
@@ -65,7 +65,7 @@ class PdfInvoiceApi {
         ],
       );
 
-  static Widget buildInvoiceInfo(reportInfo info) {
+  static Widget buildInvoiceInfo(ReportInfo info) {
     final paymentTerms = '${info.dueDate.difference(info.date).inDays} days';
     final titles = <String>[
       'Report Number:',
@@ -100,7 +100,7 @@ class PdfInvoiceApi {
         ],
       );
 
-  static Widget buildTitle(report invoice) => Column(
+  static Widget buildTitle(Report invoice) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -113,13 +113,12 @@ class PdfInvoiceApi {
         ],
       );
 
-  static Widget buildInvoice(report invoice) {
-    final headers = ['No','Standard', 'Description', 'Differences'];
+  static Widget buildInvoice(Report invoice) {
+    final headers = ['No', 'Description', 'Differences'];
     final data = invoice.items.map((item) {
       // final total = item.unitPrice * item.quantity * (1 + item.vat);
 
       return [
-        item.stdImage,
         item.no,
         item.description,
         item.differences,
@@ -131,18 +130,17 @@ class PdfInvoiceApi {
       data: data,
       border: null,
       headerStyle: TextStyle(fontWeight: FontWeight.bold),
-      headerDecoration: BoxDecoration(color: PdfColors.grey300),
+      headerDecoration: const BoxDecoration(color: PdfColors.grey300),
       cellHeight: 30,
       cellAlignments: {
         0: Alignment.centerLeft,
-        1: Alignment.centerRight,
+        1: Alignment.center,
         2: Alignment.centerRight,
-        3: Alignment.centerRight,
       },
     );
   }
 
-  static Widget buildTotal(report invoice) {
+  static Widget buildTotal(Report invoice) {
     // final netTotal = invoice.items
     //     .map((item) => item.unitPrice * item.quantity)
     //     .reduce((item1, item2) => item1 + item2);
@@ -187,7 +185,7 @@ class PdfInvoiceApi {
     );
   }
 
-  static Widget buildFooter(report invoice) => Column(
+  static Widget buildFooter(Report invoice) => Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Divider(),

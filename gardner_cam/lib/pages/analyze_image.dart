@@ -12,15 +12,15 @@ import 'package:gardner_cam/model/supplier.dart';
 import 'package:gardner_cam/pages/compare_image.dart';
 import 'package:image_cropper/image_cropper.dart';
 
-class analyzeImage extends StatefulWidget {
+class AnalyzeImage extends StatefulWidget {
   final CroppedFile image;
-  const analyzeImage({super.key, required this.image});
+  const AnalyzeImage({super.key, required this.image});
 
   @override
-  State<analyzeImage> createState() => _analyzeImageState();
+  State<AnalyzeImage> createState() => _AnalyzeImageState();
 }
 
-class _analyzeImageState extends State<analyzeImage> {
+class _AnalyzeImageState extends State<AnalyzeImage> {
   String val1 = '';
   String val2 = '';
   String val3 = '';
@@ -75,59 +75,54 @@ class _analyzeImageState extends State<analyzeImage> {
 
   void pdfPage1() async {
     final date = DateTime.now();
-    final dueDate = date.add(Duration(days: 7));
+    final dueDate = date.add(const Duration(days: 7));
 
-    final Report = report(
-      supplier: Supplier(
+    final reportPage = Report(
+      supplier: const Supplier(
         name: 'GARDNER CAM APP REPORT',
         address: 'Laboratorium Teknik Sipil Universitas Tidar Magelang',
         paymentInfo: 'https://elab.untidar.ac.id',
       ),
-      customer: Customer(
+      customer: const Customer(
         name: 'Nama User',
         address: 'Alamat user',
       ),
-      info: reportInfo(
+      info: ReportInfo(
         date: date,
         dueDate: dueDate,
         description: 'ASTM-C40 using Eucladian Color Distance Algorithm',
         number: '${DateTime.now().year}-9999',
       ),
       items: [
-        reportItem(
-          stdImage: await getImageAsList('assets/images/1.jpg'),
-          no: '1',
-          description:
+        ReportItem(
+            no: '1',
+            description:
                 'Compare With Standard Color Number 1 has differences :',
-          differences: val1),
-        reportItem(
-          stdImage: await getImageAsList('assets/images/2.jpg'),
-          no: '2',
-          description:
+            differences: val1),
+        ReportItem(
+            no: '2',
+            description:
                 'Compare With Standard Color Number 2 has differences :',
-          differences: val2),
-        reportItem(
-          stdImage: await getImageAsList('assets/images/3.jpg'),
+            differences: val2),
+        ReportItem(
             no: '3',
             description:
                 'Compare With Standard Color Number 3 has differences :',
             differences: val3),
-        reportItem(
-          stdImage: await getImageAsList('assets/images/4.jpg'),
-          no: '4',
-          description:
+        ReportItem(
+            no: '4',
+            description:
                 'Compare With Standard Color Number 4 has differences :',
-          differences: val4),
-        reportItem(
-          stdImage: await getImageAsList('assets/images/5.jpg'),
-          no: '5',
-          description:
+            differences: val4),
+        ReportItem(
+            no: '5',
+            description:
                 'Compare With Standard Color Number 5 has differences :',
-          differences: val5),
+            differences: val5),
       ],
     );
 
-    final pdfFile = await PdfInvoiceApi.generate(Report);
+    final pdfFile = await PdfInvoiceApi.generate(reportPage);
 
     PdfApi.openFile(pdfFile);
   }
@@ -138,7 +133,7 @@ class _analyzeImageState extends State<analyzeImage> {
         appBar: AppBar(
           title: const Text('Analyze Image'),
           centerTitle: true,
-          backgroundColor: Color.fromARGB(255, 252, 38, 38),
+          backgroundColor: const Color.fromARGB(255, 252, 38, 38),
           foregroundColor: Colors.white,
         ),
         body: Column(
@@ -150,13 +145,13 @@ class _analyzeImageState extends State<analyzeImage> {
                 width: 250.w,
                 height: 250.h,
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Color.fromARGB(255, 138, 63, 1)),
                 child: Container(
-                  margin: EdgeInsets.all(2),
+                  margin: const EdgeInsets.all(2),
                   clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(shape: BoxShape.circle),
+                  decoration: const BoxDecoration(shape: BoxShape.circle),
                   child: Image(
                     image: FileImage(File(widget.image.path)),
                     fit: BoxFit.cover,
@@ -165,12 +160,12 @@ class _analyzeImageState extends State<analyzeImage> {
               ),
             ),
             ElevatedButton.icon(
-                icon: Icon(Icons.assessment_outlined),
+                icon: const Icon(Icons.assessment_outlined),
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
                 onPressed: () async {
                   pencetTombol();
                 },
-                label: Text('Analyze')),
+                label: const Text('Analyze')),
             Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w)),
             //=======================================list 1
@@ -178,78 +173,81 @@ class _analyzeImageState extends State<analyzeImage> {
               margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
               alignment: Alignment.topLeft,
               padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 241, 216, 144),
+                  borderRadius: BorderRadius.circular(12.r)),
               child: Row(
                 children: [
                   Container(
                     clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(shape: BoxShape.circle),
-                    child: Image(image: AssetImage('assets/images/1.jpg')),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
+                    child:
+                        const Image(image: AssetImage('assets/images/1.jpg')),
                   ),
-                  Text(' Compare with std 1 has differences:'),
+                  const Text(' Compare with std 1 has differences:'),
                   Container(
                     margin: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
                     child: Text(
                       '$val1%',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
               ),
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 241, 216, 144),
-                  borderRadius: BorderRadius.circular(12.r)),
             ),
             //=======================================list 2
             Container(
               margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
               alignment: Alignment.topLeft,
               padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 241, 216, 144),
+                  borderRadius: BorderRadius.circular(12.r)),
               child: Row(
                 children: [
                   Container(
                     clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(shape: BoxShape.circle),
-                    child: Image(image: AssetImage('assets/images/2.jpg')),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
+                    child:
+                        const Image(image: AssetImage('assets/images/2.jpg')),
                   ),
-                  Text(' Compare with std 2 has differences: '),
+                  const Text(' Compare with std 2 has differences: '),
                   Container(
                     margin: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
                     child: Text(
                       '$val2%',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
               ),
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 241, 216, 144),
-                  borderRadius: BorderRadius.circular(12.r)),
             ),
             //===============list 3
             Container(
               margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
               alignment: Alignment.topLeft,
               padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 241, 216, 144),
+                  borderRadius: BorderRadius.circular(12.r)),
               child: Row(
                 children: [
                   Container(
                     clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(shape: BoxShape.circle),
-                    child: Image(image: AssetImage('assets/images/3.jpg')),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
+                    child:
+                        const Image(image: AssetImage('assets/images/3.jpg')),
                   ),
-                  Text(' Compare with std 3 has differences: '),
+                  const Text(' Compare with std 3 has differences: '),
                   Container(
                     margin: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
                     child: Text(
                       '$val3%',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
               ),
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 241, 216, 144),
-                  borderRadius: BorderRadius.circular(12.r)),
             ),
 
             //===============list 4
@@ -257,26 +255,27 @@ class _analyzeImageState extends State<analyzeImage> {
               margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
               alignment: Alignment.topLeft,
               padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 241, 216, 144),
+                  borderRadius: BorderRadius.circular(12.r)),
               child: Row(
                 children: [
                   Container(
                     clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(shape: BoxShape.circle),
-                    child: Image(image: AssetImage('assets/images/4.jpg')),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
+                    child:
+                        const Image(image: AssetImage('assets/images/4.jpg')),
                   ),
-                  Text(' Compare with std 4 has differences: '),
+                  const Text(' Compare with std 4 has differences: '),
                   Container(
                     margin: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
                     child: Text(
                       '$val4%',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
               ),
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 241, 216, 144),
-                  borderRadius: BorderRadius.circular(12.r)),
             ),
 
             //===============list 5
@@ -284,46 +283,47 @@ class _analyzeImageState extends State<analyzeImage> {
               margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
               alignment: Alignment.topLeft,
               padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 241, 216, 144),
+                  borderRadius: BorderRadius.circular(12.r)),
               child: Row(
                 children: [
                   Container(
                     clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(shape: BoxShape.circle),
-                    child: Image(image: AssetImage('assets/images/5.jpg')),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
+                    child:
+                        const Image(image: AssetImage('assets/images/5.jpg')),
                   ),
-                  Text('Compare with std 5 has differences: '),
+                  const Text('Compare with std 5 has differences: '),
                   Container(
                     margin: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
                     child: Text(
                       '$val5%',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
               ),
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 241, 216, 144),
-                  borderRadius: BorderRadius.circular(12.r)),
             ),
             Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w)),
 
             ElevatedButton.icon(
-                icon: Icon(Icons.picture_as_pdf_outlined),
+                icon: const Icon(Icons.picture_as_pdf_outlined),
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
                 onPressed: () async {
                   pdfPage1();
                 },
-                label: Text('Save Report')),
+                label: const Text('Save Report')),
 
             ElevatedButton.icon(
-                icon: Icon(Icons.home),
+                icon: const Icon(Icons.home),
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
                 onPressed: () async {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const MainApp()));
                 },
-                label: Text('Back  Home')),
+                label: const Text('Back  Home')),
           ],
         ));
   }

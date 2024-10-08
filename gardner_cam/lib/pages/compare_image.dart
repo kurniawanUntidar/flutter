@@ -104,11 +104,6 @@ Future<List<int>> getImageAsList(String imagePath) async {
 }
 
 Future<String> compare(CroppedFile imageToCompare, int stdNo) async {
-  String std1 = 'assets/images/1.jpg';
-  String std2 = 'assets/images/2.jpg';
-  String std3 = 'assets/images/3.jpg';
-  String std4 = 'assets/images/4.jpg';
-  String std5 = 'assets/images/5.jpg';
   List<int> stdBytes = [];
 
   switch (stdNo) {
@@ -138,7 +133,6 @@ Future<String> compare(CroppedFile imageToCompare, int stdNo) async {
       }
       break;
   }
-  ;
 
   //  List<int> stdBytes = await getImageAsList('assets/images/1.jpg');
 

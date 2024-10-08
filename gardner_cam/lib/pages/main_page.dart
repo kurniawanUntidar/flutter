@@ -28,7 +28,7 @@ class _MainPageState extends State<MainPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: ((context) => analyzeImage(
+          builder: ((context) => AnalyzeImage(
                 image: croppedImage,
               )),
         ),
@@ -49,7 +49,7 @@ class _MainPageState extends State<MainPage> {
       uiSettings: [
         AndroidUiSettings(
           toolbarTitle: 'Crop Image',
-          toolbarColor: Color.fromARGB(255, 252, 38, 38),
+          toolbarColor: const Color.fromARGB(255, 252, 38, 38),
           toolbarWidgetColor: Colors.white,
           initAspectRatio: CropAspectRatioPreset.original,
           lockAspectRatio: false,
@@ -68,9 +68,8 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [],
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                   colors: [
                     Color.fromARGB(255, 245, 137, 118),
@@ -95,7 +94,7 @@ class _MainPageState extends State<MainPage> {
                   ..strokeWidth = 4
                   ..color = const Color.fromARGB(255, 107, 28, 4)),
           ),
-          Text(
+          const Text(
             'GARDNER CAM',
             style: TextStyle(fontWeight: FontWeight.bold),
           )
@@ -111,10 +110,10 @@ class _MainPageState extends State<MainPage> {
               onPressed: () {
                 pickImage(false);
               },
-              style: ButtonStyle(
+              style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll<Color>(
                       Color.fromARGB(255, 252, 38, 38))),
-              child: Text(
+              child: const Text(
                 'Capture Image',
                 style: TextStyle(color: Colors.white),
               ),
@@ -123,10 +122,10 @@ class _MainPageState extends State<MainPage> {
               onPressed: () {
                 pickImage(true);
               },
-              style: ButtonStyle(
+              style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll<Color>(
                       Color.fromARGB(255, 252, 38, 38))),
-              child: Text(
+              child: const Text(
                 'Pick Gallery Image',
                 style: TextStyle(color: Colors.white),
               ),
