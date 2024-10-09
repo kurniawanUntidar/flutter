@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gardner_cam/pages/analyze_image.dart';
+import 'package:gardner_cam/pages/help_page.dart';
+import 'package:gardner_cam/pages/profile_page.dart';
+import 'package:gardner_cam/pages/setting_page.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -75,8 +79,8 @@ class _MainPageState extends State<MainPage> {
                     Color.fromARGB(255, 245, 137, 118),
                     Color.fromARGB(255, 248, 41, 4)
                   ],
-                  begin: FractionalOffset.topLeft,
-                  end: FractionalOffset.bottomRight),
+                  begin: FractionalOffset.topRight,
+                  end: FractionalOffset.bottomLeft),
               image: DecorationImage(
                 image: AssetImage("assets/images/pattern.png"),
                 fit: BoxFit.fitWidth,
@@ -102,6 +106,74 @@ class _MainPageState extends State<MainPage> {
         centerTitle: true,
         foregroundColor: Colors.white,
       ),
+      //************************************************************************/
+      drawer: Drawer(
+          backgroundColor: const Color.fromARGB(255, 240, 75, 47),
+          child: Column(
+            children: [
+              DrawerHeader(
+                child: SizedBox(
+                  width: 250.w,
+                  height: 250.h,
+                  child: const Image(
+                      image: AssetImage('assets/icons/play_store_512.png')),
+                ),
+              ),
+              ListTile(
+                  leading: const Icon(
+                    Icons.person_add,
+                    color: Colors.white,
+                  ),
+                  title: const Text(
+                    'P R O F I L E',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfilePage()));
+                  }),
+              ListTile(
+                  leading: const Icon(
+                    Icons.settings,
+                    color: Colors.white,
+                  ),
+                  title: const Text(
+                    'S E T T I N G',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SettingPage()));
+                  }),
+              ListTile(
+                  leading: const Icon(
+                    Icons.help_center,
+                    color: Colors.white,
+                  ),
+                  title: const Text(
+                    'H E L P',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HelpPage()));
+                  })
+            ],
+          )),
+
+      //************************************************************************/
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,

@@ -10,6 +10,7 @@ import 'package:gardner_cam/model/customer.dart';
 import 'package:gardner_cam/model/report.dart';
 import 'package:gardner_cam/model/supplier.dart';
 import 'package:gardner_cam/pages/compare_image.dart';
+import 'package:gardner_cam/pages/main_page.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class AnalyzeImage extends StatefulWidget {
@@ -141,9 +142,9 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
           children: [
             Center(
               child: Container(
-                margin: EdgeInsets.all(12.h),
-                width: 250.w,
-                height: 250.h,
+                margin: EdgeInsets.all(20.h),
+                width: 400.w,
+                height: 400.h,
                 clipBehavior: Clip.antiAlias,
                 decoration: const BoxDecoration(
                     shape: BoxShape.circle,
@@ -167,12 +168,13 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                 },
                 label: const Text('Analyze')),
             Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w)),
+                padding:
+                    EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w)),
             //=======================================list 1
             Container(
-              margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
+              margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
+              padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
               decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 241, 216, 144),
                   borderRadius: BorderRadius.circular(12.r)),
@@ -197,9 +199,9 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
             ),
             //=======================================list 2
             Container(
-              margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
+              margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
+              padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
               decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 241, 216, 144),
                   borderRadius: BorderRadius.circular(12.r)),
@@ -224,9 +226,9 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
             ),
             //===============list 3
             Container(
-              margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
+              margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
+              padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
               decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 241, 216, 144),
                   borderRadius: BorderRadius.circular(12.r)),
@@ -252,9 +254,9 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
 
             //===============list 4
             Container(
-              margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
+              margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
+              padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
               decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 241, 216, 144),
                   borderRadius: BorderRadius.circular(12.r)),
@@ -280,9 +282,9 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
 
             //===============list 5
             Container(
-              margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 10.w),
+              margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
+              padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
               decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 241, 216, 144),
                   borderRadius: BorderRadius.circular(12.r)),
@@ -306,7 +308,8 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
               ),
             ),
             Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w)),
+                padding:
+                    EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w)),
 
             ElevatedButton.icon(
                 icon: const Icon(Icons.picture_as_pdf_outlined),
@@ -321,7 +324,7 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
                 onPressed: () async {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const MainApp()));
+                      MaterialPageRoute(builder: (context) => MainPage()));
                 },
                 label: const Text('Back  Home')),
           ],
