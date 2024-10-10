@@ -1,8 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gardner_cam/main.dart';
 import 'package:gardner_cam/pages/main_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -13,6 +13,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  TextEditingController textEditingController = TextEditingController(text: '');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +36,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 textAlign: TextAlign.left,
                 cursorColor: Colors.black38,
-                //inputFormatters: [TextInputFormatter.withFunction(())],
                 decoration: InputDecoration(
                   hintText: 'Type your Laboratorium Name',
                   hintStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.normal),
@@ -49,7 +49,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 textAlign: TextAlign.left,
                 cursorColor: Colors.black38,
-                //inputFormatters: [TextInputFormatter.withFunction(())],
                 decoration: InputDecoration(
                   hintText: 'Address: Street, City, Region etc',
                   hintStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.normal),
@@ -63,9 +62,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 textAlign: TextAlign.left,
                 cursorColor: Colors.black38,
-                //inputFormatters: [TextInputFormatter.withFunction(())],
                 decoration: InputDecoration(
-                  hintText: 'i.e',
+                  hintText: 'i.e http://elab.untidar.ac.id',
                   hintStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.normal),
                   labelText: 'Website',
                   labelStyle: TextStyle(fontWeight: FontWeight.bold,color: Colors.redAccent)
@@ -77,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
                 onPressed: () async {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MainPage()));
+                      MaterialPageRoute(builder: (context) => const MainPage()));
                 },
                 label: const Text('Save')),
             ],
