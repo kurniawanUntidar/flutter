@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:gardner_cam/api/pdf_api.dart';
 import 'package:gardner_cam/model/customer.dart';
 import 'package:gardner_cam/model/report.dart';
-import 'package:gardner_cam/model/supplier.dart';
+import 'package:gardner_cam/model/laboratorium.dart';
 import 'package:gardner_cam/utils.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -34,7 +34,7 @@ class PdfInvoiceApi {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildSupplierAddress(invoice.supplier),
+              buildSupplierAddress(invoice.laboratorium),
               Container(
                 height: 50,
                 width: 50,
@@ -91,12 +91,12 @@ class PdfInvoiceApi {
     );
   }
 
-  static Widget buildSupplierAddress(Supplier supplier) => Column(
+  static Widget buildSupplierAddress(Laboratorium laboratorium) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(supplier.name, style: TextStyle(fontWeight: FontWeight.bold)),
+          Text(laboratorium.name, style: TextStyle(fontWeight: FontWeight.bold)),
           SizedBox(height: 1 * PdfPageFormat.mm),
-          Text(supplier.address),
+          Text(laboratorium.address),
         ],
       );
 
@@ -190,10 +190,10 @@ class PdfInvoiceApi {
         children: [
           Divider(),
           SizedBox(height: 2 * PdfPageFormat.mm),
-          buildSimpleText(title: 'Address', value: invoice.supplier.address),
+          buildSimpleText(title: 'Address', value: invoice.laboratorium.address),
           SizedBox(height: 1 * PdfPageFormat.mm),
           buildSimpleText(
-              title: 'website', value: invoice.supplier.paymentInfo),
+              title: 'website', value: invoice.laboratorium.web),
         ],
       );
 

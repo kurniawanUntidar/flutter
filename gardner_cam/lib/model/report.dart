@@ -1,15 +1,15 @@
 import 'package:gardner_cam/model/customer.dart';
-import 'package:gardner_cam/model/supplier.dart';
+import 'package:gardner_cam/model/laboratorium.dart';
 
 class Report {
   final ReportInfo info;
-  final Supplier supplier;
+  final Laboratorium laboratorium;
   final Customer customer;
   final List<ReportItem> items;
 
   const Report({
     required this.info,
-    required this.supplier,
+    required this.laboratorium,
     required this.customer,
     required this.items,
   });

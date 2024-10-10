@@ -5,10 +5,9 @@ import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gardner_cam/api/pdf_api.dart';
 import 'package:gardner_cam/api/pdf_invoice_api.dart';
-import 'package:gardner_cam/main.dart';
 import 'package:gardner_cam/model/customer.dart';
 import 'package:gardner_cam/model/report.dart';
-import 'package:gardner_cam/model/supplier.dart';
+import 'package:gardner_cam/model/laboratorium.dart';
 import 'package:gardner_cam/pages/compare_image.dart';
 import 'package:gardner_cam/pages/main_page.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -79,10 +78,10 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
     final dueDate = date.add(const Duration(days: 7));
 
     final reportPage = Report(
-      supplier: const Supplier(
+      laboratorium: const Laboratorium(
         name: 'GARDNER CAM APP REPORT',
         address: 'Laboratorium Teknik Sipil Universitas Tidar Magelang',
-        paymentInfo: 'https://elab.untidar.ac.id',
+        web: 'https://elab.untidar.ac.id',
       ),
       customer: const Customer(
         name: 'Nama User',

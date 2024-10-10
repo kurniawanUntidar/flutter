@@ -1,11 +1,11 @@
-class Supplier {
+class Laboratorium {
   final String name;
   final String address;
-  final String paymentInfo;
+  final String web;
 
-  const Supplier({
+  const Laboratorium({
     required this.name,
     required this.address,
-    required this.paymentInfo,
+    required this.web,
   });
 }
