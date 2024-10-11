@@ -1,15 +1,19 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gardner_cam/api/pdf_api.dart';
 import 'package:gardner_cam/api/pdf_invoice_api.dart';
+import 'package:gardner_cam/main.dart';
 import 'package:gardner_cam/model/customer.dart';
 import 'package:gardner_cam/model/report.dart';
 import 'package:gardner_cam/model/laboratorium.dart';
 import 'package:gardner_cam/pages/compare_image.dart';
 import 'package:gardner_cam/pages/main_page.dart';
+import 'package:gardner_cam/utils.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class AnalyzeImage extends StatefulWidget {
@@ -53,6 +57,12 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
       val5 = val5;
     });
   }
+  // Future<Laboratorium>ReadJsonConfig() async{
+  //     final jsonData = await rootBundle.loadString('assets/config.json');
+  //     Map<String,dynamic> jsonMap = jsonDecode(jsonData);
+  //     final lab = Laboratorium.fromJson(jsonMap);
+  //     return lab;
+  //   }
 
   void saveImage(CroppedFile imageToSave) async {
     String? message;
@@ -78,11 +88,13 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
     final dueDate = date.add(const Duration(days: 7));
 
     final reportPage = Report(
-      laboratorium: const Laboratorium(
-        name: 'GARDNER CAM APP REPORT',
-        address: 'Laboratorium Teknik Sipil Universitas Tidar Magelang',
-        web: 'https://elab.untidar.ac.id',
-      ),
+       laboratorium:await lab,
+      // laboratorium: const Laboratorium(
+      //   name: 'GARDNER CAM APP REPORT',
+      //   address: 'Laboratorium Teknik Sipil Universitas Tidar Magelang',
+      //   web: 'https://elab.untidar.ac.id',
+      // ),
+      
       customer: const Customer(
         name: 'Nama User',
         address: 'Alamat user',

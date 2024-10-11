@@ -91,12 +91,12 @@ class PdfInvoiceApi {
     );
   }
 
-  static Widget buildSupplierAddress(Laboratorium laboratorium) => Column(
+  static Widget buildSupplierAddress(Laboratorium? laboratorium) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(laboratorium.name, style: TextStyle(fontWeight: FontWeight.bold)),
+          Text(laboratorium!.name!.toString(), style: TextStyle(fontWeight: FontWeight.bold)),
           SizedBox(height: 1 * PdfPageFormat.mm),
-          Text(laboratorium.address),
+          Text(laboratorium.address!.toString()),
         ],
       );
 
@@ -190,11 +190,11 @@ class PdfInvoiceApi {
         children: [
           Divider(),
           SizedBox(height: 2 * PdfPageFormat.mm),
-          buildSimpleText(title: 'Address', value: invoice.laboratorium.address),
+//          buildSimpleText(title: 'Address', value: invoice.laboratorium.address),
           SizedBox(height: 1 * PdfPageFormat.mm),
-          buildSimpleText(
-              title: 'website', value: invoice.laboratorium.web),
-        ],
+        //   buildSimpleText(
+        //       title: 'website', value: invoice.laboratorium.web),
+          ],
       );
 
   static buildSimpleText({

@@ -3,7 +3,7 @@ import 'package:gardner_cam/model/laboratorium.dart';
 
 class Report {
   final ReportInfo info;
-  final Laboratorium laboratorium;
+  final Laboratorium? laboratorium;
   final Customer customer;
   final List<ReportItem> items;
 

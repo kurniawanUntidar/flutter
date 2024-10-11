@@ -1,21 +1,35 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gardner_cam/model/laboratorium.dart';
 import 'package:gardner_cam/pages/main_page.dart';
+import 'package:gardner_cam/utils.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  final Future<Laboratorium>? labProfile;
+  const ProfilePage({super.key, required this.labProfile});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
+Future<Laboratorium>ReadJsonConfig() async{
+      final jsonData = await rootBundle.loadString('assets/config.json');
+      Map<String,dynamic> jsonMap = jsonDecode(jsonData);
+      //final lab = Laboratorium.fromJson(jsonMap);
+      return Laboratorium.fromJson(jsonMap);
+    }
 
 class _ProfilePageState extends State<ProfilePage> {
   TextEditingController textEditingController = TextEditingController(text: '');
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) async {
+    lab = ReadJsonConfig();
+    Laboratorium? labConfig = await lab;
+    String namaLab = 'Nama Lab';
     return Scaffold(
       appBar: AppBar(
         title: const Text('Set Profile'),
@@ -37,7 +51,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 textAlign: TextAlign.left,
                 cursorColor: Colors.black38,
                 decoration: InputDecoration(
-                  hintText: 'Type your Laboratorium Name',
+                  hintText: '',
+                  // hintText: 'Type your Laboratorium Name',
                   hintStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.normal),
                   labelText: 'Laboratorium',
                   labelStyle: TextStyle(fontWeight: FontWeight.bold,color: Colors.redAccent)

@@ -4,6 +4,7 @@ import 'package:gardner_cam/pages/analyze_image.dart';
 import 'package:gardner_cam/pages/help_page.dart';
 import 'package:gardner_cam/pages/profile_page.dart';
 import 'package:gardner_cam/pages/setting_page.dart';
+import 'package:gardner_cam/utils.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -134,7 +135,7 @@ class _MainPageState extends State<MainPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ProfilePage()));
+                            builder: (context) => ProfilePage(lab)));
                   }),
               ListTile(
                   leading: const Icon(
