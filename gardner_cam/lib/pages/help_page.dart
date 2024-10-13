@@ -9,7 +9,7 @@ class HelpPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Help!'),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 252, 38, 38),
+        backgroundColor: Colors.deepOrange,
         foregroundColor: Colors.white,
       ),
     );

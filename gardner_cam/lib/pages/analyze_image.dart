@@ -1,16 +1,12 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gardner_cam/api/pdf_api.dart';
 import 'package:gardner_cam/api/pdf_invoice_api.dart';
-import 'package:gardner_cam/main.dart';
 import 'package:gardner_cam/model/customer.dart';
 import 'package:gardner_cam/model/report.dart';
-import 'package:gardner_cam/model/laboratorium.dart';
 import 'package:gardner_cam/pages/compare_image.dart';
 import 'package:gardner_cam/pages/main_page.dart';
 import 'package:gardner_cam/utils.dart';
@@ -88,13 +84,13 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
     final dueDate = date.add(const Duration(days: 7));
 
     final reportPage = Report(
-       laboratorium:await lab,
+      laboratorium: await lab,
       // laboratorium: const Laboratorium(
       //   name: 'GARDNER CAM APP REPORT',
       //   address: 'Laboratorium Teknik Sipil Universitas Tidar Magelang',
       //   web: 'https://elab.untidar.ac.id',
       // ),
-      
+
       customer: const Customer(
         name: 'Nama User',
         address: 'Alamat user',
@@ -145,7 +141,7 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
         appBar: AppBar(
           title: const Text('Analyze Image'),
           centerTitle: true,
-          backgroundColor: const Color.fromARGB(255, 252, 38, 38),
+          backgroundColor: Colors.deepOrange,
           foregroundColor: Colors.white,
         ),
         body: Column(

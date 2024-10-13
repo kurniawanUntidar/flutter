@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:gardner_cam/pages/analyze_image.dart';
 import 'package:gardner_cam/pages/help_page.dart';
 import 'package:gardner_cam/pages/profile_page.dart';
 import 'package:gardner_cam/pages/setting_page.dart';
-import 'package:gardner_cam/utils.dart';
+
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -75,13 +77,7 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [
-                    Color.fromARGB(255, 245, 137, 118),
-                    Color.fromARGB(255, 248, 41, 4)
-                  ],
-                  begin: FractionalOffset.topRight,
-                  end: FractionalOffset.bottomLeft),
+              color: Colors.deepOrange,
               image: DecorationImage(
                 image: AssetImage("assets/images/pattern.png"),
                 fit: BoxFit.fitWidth,
@@ -109,7 +105,7 @@ class _MainPageState extends State<MainPage> {
       ),
       //************************************************************************/
       drawer: Drawer(
-          backgroundColor: const Color.fromARGB(255, 240, 75, 47),
+          backgroundColor: Color.fromARGB(255, 248, 111, 69),
           child: Column(
             children: [
               DrawerHeader(
@@ -135,7 +131,7 @@ class _MainPageState extends State<MainPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ProfilePage(lab)));
+                            builder: (context) => const ProfilePage()));
                   }),
               ListTile(
                   leading: const Icon(
@@ -175,34 +171,130 @@ class _MainPageState extends State<MainPage> {
           )),
 
       //************************************************************************/
-      body: Center(
+      body: Container(
+        margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+        color: Color.fromARGB(255, 245, 233, 191),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () {
+            GestureDetector(
+              onTap: () {
                 pickImage(false);
               },
-              style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll<Color>(
-                      Color.fromARGB(255, 252, 38, 38))),
-              child: const Text(
-                'Capture Image',
-                style: TextStyle(color: Colors.white),
+              child: Card(
+                elevation: 5,
+                color: Colors.deepOrange,
+                child: Row(
+                  children: [
+                    Container(
+                      height: 300.h,
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10.h, horizontal: 10.w),
+                      margin: EdgeInsets.symmetric(
+                          vertical: 10.h, horizontal: 10.w),
+                      child: Image.asset(
+                        'assets/icons/CaptureBotle.png',
+                        fit: BoxFit.fitHeight,
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Capture Image',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 80.w,
+                              color: Colors.white),
+                        ),
+                        Container(
+                          width: 980.w,
+                          child: Text(
+                            'Use camera modul to take a picture from supernatant liquid test sample',
+                            style: TextStyle(color: Colors.white),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
+
+            GestureDetector(
+              onTap: () {
                 pickImage(true);
               },
-              style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll<Color>(
-                      Color.fromARGB(255, 252, 38, 38))),
-              child: const Text(
-                'Pick Gallery Image',
-                style: TextStyle(color: Colors.white),
+              child: Card(
+                elevation: 5,
+                color: Colors.deepOrange,
+                child: Row(
+                  children: [
+                    Container(
+                      height: 300.h,
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10.h, horizontal: 10.w),
+                      margin: EdgeInsets.symmetric(
+                          vertical: 10.h, horizontal: 10.w),
+                      child: Image.asset(
+                        'assets/icons/PickGalery.png',
+                        fit: BoxFit.fitHeight,
+                      ),
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Pick Gallery',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 80.w,
+                              color: Colors.white),
+                        ),
+                        Container(
+                          width: 980.w,
+                          child: Text(
+                            'Pick image of supernatant liquid test sample on phone gallery',
+                            style: TextStyle(color: Colors.white),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
+            //Text(context.read<FileController>()=> user),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     pickImage(false);
+            //   },
+            //   style: const ButtonStyle(
+            //       backgroundColor: MaterialStatePropertyAll<Color>(
+            //           Color.fromARGB(255, 252, 38, 38))),
+            //   child: const Text(
+            //     'Capture Image',
+            //     style: TextStyle(color: Colors.white),
+            //   ),
+            // ),
+
+            // /* =============== Pick Image Fromm Galery ================ */
+            // ElevatedButton(
+            //   onPressed: () {
+            //     pickImage(true);
+            //   },
+            //   style: const ButtonStyle(
+            //       backgroundColor: MaterialStatePropertyAll<Color>(
+            //           Color.fromARGB(255, 252, 38, 38))),
+            //   child: const Text(
+            //     'Pick Gallery Image',
+            //     style: TextStyle(color: Colors.white),
+            //   ),
+            // ),
           ],
         ),
       ),

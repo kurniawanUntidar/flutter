@@ -1,9 +1,10 @@
 import 'package:gardner_cam/model/customer.dart';
-import 'package:gardner_cam/model/laboratorium.dart';
+import 'package:gardner_cam/model/user.dart';
 
 class Report {
   final ReportInfo info;
-  final Laboratorium? laboratorium;
+  final User? laboratorium;
+  // final Laboratorium? laboratorium;
   final Customer customer;
   final List<ReportItem> items;
 

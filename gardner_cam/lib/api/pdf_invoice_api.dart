@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:gardner_cam/api/pdf_api.dart';
 import 'package:gardner_cam/model/customer.dart';
 import 'package:gardner_cam/model/report.dart';
-import 'package:gardner_cam/model/laboratorium.dart';
+import 'package:gardner_cam/model/user.dart';
 import 'package:gardner_cam/utils.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -66,17 +66,15 @@ class PdfInvoiceApi {
       );
 
   static Widget buildInvoiceInfo(ReportInfo info) {
-    final paymentTerms = '${info.dueDate.difference(info.date).inDays} days';
+    //final paymentTerms = '${info.dueDate.difference(info.date).inDays} days';
     final titles = <String>[
       'Report Number:',
       'Test Date:',
-      'Location:',
       'Light Intensity (lux):'
     ];
     final data = <String>[
       info.number,
       Utils.formatDate(info.date),
-      paymentTerms,
       Utils.formatDate(info.dueDate),
     ];
 
@@ -91,12 +89,15 @@ class PdfInvoiceApi {
     );
   }
 
-  static Widget buildSupplierAddress(Laboratorium? laboratorium) => Column(
+  static Widget buildSupplierAddress(User? laboratorium) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(laboratorium!.name!.toString(), style: TextStyle(fontWeight: FontWeight.bold)),
+          Text(laboratorium!.name!.toString(),
+              style: TextStyle(fontWeight: FontWeight.bold)),
           SizedBox(height: 1 * PdfPageFormat.mm),
           Text(laboratorium.address!.toString()),
+          SizedBox(height: 1 * PdfPageFormat.mm),
+          Text(laboratorium.web!.toString()),
         ],
       );
 
@@ -141,6 +142,43 @@ class PdfInvoiceApi {
   }
 
   static Widget buildTotal(Report invoice) {
+    double dif1 = double.parse(invoice.items[0].differences);
+    double dif2 = double.parse(invoice.items[1].differences);
+    double dif3 = double.parse(invoice.items[2].differences);
+    double dif4 = double.parse(invoice.items[3].differences);
+    double dif5 = double.parse(invoice.items[4].differences);
+
+    ReportItem minimal;
+    double valMin;
+
+    if (dif1 > dif2) {
+      minimal = invoice.items[1];
+      valMin = double.parse(minimal.differences);
+    } else {
+      minimal = invoice.items[0];
+      valMin = double.parse(minimal.differences);
+    }
+    if (valMin > dif3) {
+      minimal = invoice.items[2];
+      valMin = double.parse(minimal.differences);
+    } else {
+      minimal = minimal;
+      valMin = double.parse(minimal.differences);
+    }
+    if (valMin > dif4) {
+      minimal = invoice.items[3];
+      valMin = double.parse(minimal.differences);
+    } else {
+      minimal = minimal;
+      valMin = double.parse(minimal.differences);
+    }
+    if (valMin > dif5) {
+      minimal = invoice.items[4];
+      valMin = double.parse(minimal.differences);
+    } else {
+      minimal = minimal;
+      valMin = double.parse(minimal.differences);
+    }
     // final netTotal = invoice.items
     //     .map((item) => item.unitPrice * item.quantity)
     //     .reduce((item1, item2) => item1 + item2);
@@ -160,17 +198,17 @@ class PdfInvoiceApi {
               children: [
                 buildText(
                   title: 'Lowest Differences :',
-                  value: '-- %',
+                  value: '$valMin %',
                   unite: true,
                 ),
                 Divider(),
                 buildText(
-                  title: 'Resume',
+                  title: 'Closest Similarity on std no',
                   titleStyle: TextStyle(
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
-                  value: '',
+                  value: minimal.no,
                   unite: true,
                 ),
                 SizedBox(height: 2 * PdfPageFormat.mm),
@@ -192,9 +230,9 @@ class PdfInvoiceApi {
           SizedBox(height: 2 * PdfPageFormat.mm),
 //          buildSimpleText(title: 'Address', value: invoice.laboratorium.address),
           SizedBox(height: 1 * PdfPageFormat.mm),
-        //   buildSimpleText(
-        //       title: 'website', value: invoice.laboratorium.web),
-          ],
+          //   buildSimpleText(
+          //       title: 'website', value: invoice.laboratorium.web),
+        ],
       );
 
   static buildSimpleText({
