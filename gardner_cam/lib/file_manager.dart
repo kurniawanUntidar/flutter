@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
+import 'package:flutter/services.dart';
 import 'package:gardner_cam/model/user.dart';
 import 'package:gardner_cam/utils.dart';
-import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -28,13 +27,33 @@ class FileManager {
 
   Future<File> get _jsonFile async {
     final path = await _directoryPath;
-    print(path);
+    //print(path);
     return File('$path/user.json');
   }
 
-  Future<File> get _imageFile async {
+  Future<File> get _imageFile1 async {
     final path = await _directoryPath;
-    return File('$path/cheetah_image');
+    return File('$path/1.jpg');
+  }
+
+  Future<File> get _imageFile2 async {
+    final path = await _directoryPath;
+    return File('$path/2.jpg');
+  }
+
+  Future<File> get _imageFile3 async {
+    final path = await _directoryPath;
+    return File('$path/3.jpg');
+  }
+
+  Future<File> get _imageFile4 async {
+    final path = await _directoryPath;
+    return File('$path/4.jpg');
+  }
+
+  Future<File> get _imageFile5 async {
+    final path = await _directoryPath;
+    return File('$path/5.jpg');
   }
 
   Future<String> readTextFile() async {
@@ -94,7 +113,9 @@ class FileManager {
       }
     }
     lab = await User.fromJson(json.decode(fileContent));
+    //  user = User.fromJson(json.decode(fileContent));
     // return json.decode(fileContent);
+    //return user;
   }
 
   Future<User> writeUserFile(String name, String address, String web) async {
@@ -117,24 +138,70 @@ class FileManager {
     return user;
   }
 
-  Future<Uint8List> writeImageFile() async {
-    Response response = await Client().get(
-      Uri.parse(
-          'https://i.pinimg.com/originals/f5/1d/08/f51d08be05919290355ac004cdd5c2d6.png'),
-    );
+  //Future<Uint8List> writeImageFile(File image, int stdNo) async {
+  // Response response = await Client().get(
+  //   Uri.parse(
+  //       'https://i.pinimg.com/originals/f5/1d/08/f51d08be05919290355ac004cdd5c2d6.png'),
+  // );
 
-    Uint8List bytes = response.bodyBytes;
-    File file = await _imageFile;
-    await file.writeAsBytes(bytes);
+  //Uint8List bytes = response.bodyBytes;
+  //File file = await _imageFile;
+  //await file.writeAsBytes(bytes);
+
+  //print(file.path);
+  //print(bytes);
+
+  //return bytes;
+  //}
+
+  Future<Uint8List> writeImageFile(Uint8List image, int std) async {
+    File file = await _imageFile1;
+    switch (std) {
+      case 1:
+        file = await _imageFile1;
+        break;
+      case 2:
+        file = await _imageFile2;
+        break;
+      case 3:
+        file = await _imageFile3;
+        break;
+      case 4:
+        file = await _imageFile4;
+        break;
+      case 5:
+        file = await _imageFile5;
+        break;
+    }
+    // Uint8List? byteList = await file.readAsBytes();
+    await file.writeAsBytes(image);
 
     print(file.path);
-    print(bytes);
-
-    return bytes;
+    // print(byteList);
+    return image;
   }
 
-  Future<Uint8List> readImageFile() async {
-    File file = await _imageFile;
+  Future<Uint8List> readImageFile(int std) async {
+    //File file = await _imageFile;
+    File file = await _imageFile1;
+    switch (std) {
+      case 1:
+        file = await _imageFile1;
+        break;
+      case 2:
+        file = await _imageFile2;
+        break;
+      case 3:
+        file = await _imageFile3;
+        break;
+      case 4:
+        file = await _imageFile4;
+        break;
+      case 5:
+        file = await _imageFile5;
+        break;
+    }
+
     Uint8List? byteList;
 
     if (await file.exists()) {
@@ -148,10 +215,48 @@ class FileManager {
     return byteList!;
   }
 
-  deleteImage() async {
-    File file = await _imageFile;
-    if (await file.exists()) {
-      await file.delete();
+  cekImageFile() async {
+    File file1 = await _imageFile1;
+    File file2 = await _imageFile2;
+    File file3 = await _imageFile3;
+    File file4 = await _imageFile4;
+    File file5 = await _imageFile5;
+    if (await file1.exists() == false) {
+      ByteData data = await rootBundle.load('assets/images/1.jpg');
+      Uint8List byteList = data.buffer.asUint8List();
+      await file1.writeAsBytes(byteList);
     }
+    if (await file2.exists() == false) {
+      ByteData data = await rootBundle.load('assets/images/2.jpg');
+      Uint8List byteList = data.buffer.asUint8List();
+      await file2.writeAsBytes(byteList);
+    }
+    if (await file3.exists() == false) {
+      ByteData data = await rootBundle.load('assets/images/3.jpg');
+      Uint8List byteList = data.buffer.asUint8List();
+      await file3.writeAsBytes(byteList);
+    }
+    if (await file4.exists() == false) {
+      ByteData data = await rootBundle.load('assets/images/4.jpg');
+      Uint8List byteList = data.buffer.asUint8List();
+      await file4.writeAsBytes(byteList);
+    }
+    if (await file5.exists() == false) {
+      ByteData data = await rootBundle.load('assets/images/5.jpg');
+      Uint8List byteList = data.buffer.asUint8List();
+      await file5.writeAsBytes(byteList);
+    }
+    // stdIm1 = file1.path;
+    // stdIm2 = file2.path;
+    // stdIm3 = file3.path;
+    // stdIm4 = file4.path;
+    // stdIm5 = file5.path;
   }
+
+  // deleteImage() async {
+  //   File file = await _imageFile;
+  //   if (await file.exists()) {
+  //     await file.delete();
+  //   }
+  // }
 }

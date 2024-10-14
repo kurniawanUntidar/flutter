@@ -5,12 +5,14 @@ import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gardner_cam/api/pdf_api.dart';
 import 'package:gardner_cam/api/pdf_invoice_api.dart';
+import 'package:gardner_cam/controller/file_controller.dart';
 import 'package:gardner_cam/model/customer.dart';
 import 'package:gardner_cam/model/report.dart';
 import 'package:gardner_cam/pages/compare_image.dart';
 import 'package:gardner_cam/pages/main_page.dart';
 import 'package:gardner_cam/utils.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:provider/provider.dart';
 
 class AnalyzeImage extends StatefulWidget {
   final CroppedFile image;
@@ -53,12 +55,6 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
       val5 = val5;
     });
   }
-  // Future<Laboratorium>ReadJsonConfig() async{
-  //     final jsonData = await rootBundle.loadString('assets/config.json');
-  //     Map<String,dynamic> jsonMap = jsonDecode(jsonData);
-  //     final lab = Laboratorium.fromJson(jsonMap);
-  //     return lab;
-  //   }
 
   void saveImage(CroppedFile imageToSave) async {
     String? message;
@@ -188,10 +184,22 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
               child: Row(
                 children: [
                   Container(
+                    width: 150.w,
+                    height: 150.h,
                     clipBehavior: Clip.antiAlias,
                     decoration: const BoxDecoration(shape: BoxShape.circle),
-                    child:
-                        const Image(image: AssetImage('assets/images/1.jpg')),
+                    child: context.select(
+                      (FileController controller) =>
+                          controller.imageByteList1 != null
+                              ? Image.memory(
+                                  controller.imageByteList1!,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  'assets/images/1.jpg',
+                                  fit: BoxFit.cover,
+                                ),
+                    ),
                   ),
                   const Text(' Compare with std 1 has differences:'),
                   Container(
@@ -204,6 +212,7 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                 ],
               ),
             ),
+
             //=======================================list 2
             Container(
               margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
@@ -215,12 +224,24 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
               child: Row(
                 children: [
                   Container(
+                    width: 150.w,
+                    height: 150.h,
                     clipBehavior: Clip.antiAlias,
                     decoration: const BoxDecoration(shape: BoxShape.circle),
-                    child:
-                        const Image(image: AssetImage('assets/images/2.jpg')),
+                    child: context.select(
+                      (FileController controller) =>
+                          controller.imageByteList2 != null
+                              ? Image.memory(
+                                  controller.imageByteList2!,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  'assets/images/2.jpg',
+                                  fit: BoxFit.cover,
+                                ),
+                    ),
                   ),
-                  const Text(' Compare with std 2 has differences: '),
+                  const Text(' Compare with std 2 has differences:'),
                   Container(
                     margin: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
                     child: Text(
@@ -231,7 +252,8 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                 ],
               ),
             ),
-            //===============list 3
+
+            //=======================================list 3
             Container(
               margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
               alignment: Alignment.topLeft,
@@ -242,12 +264,24 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
               child: Row(
                 children: [
                   Container(
+                    width: 150.w,
+                    height: 150.h,
                     clipBehavior: Clip.antiAlias,
                     decoration: const BoxDecoration(shape: BoxShape.circle),
-                    child:
-                        const Image(image: AssetImage('assets/images/3.jpg')),
+                    child: context.select(
+                      (FileController controller) =>
+                          controller.imageByteList3 != null
+                              ? Image.memory(
+                                  controller.imageByteList3!,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  'assets/images/3.jpg',
+                                  fit: BoxFit.cover,
+                                ),
+                    ),
                   ),
-                  const Text(' Compare with std 3 has differences: '),
+                  const Text(' Compare with std 3 has differences:'),
                   Container(
                     margin: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
                     child: Text(
@@ -259,7 +293,7 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
               ),
             ),
 
-            //===============list 4
+            //=======================================list 4
             Container(
               margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
               alignment: Alignment.topLeft,
@@ -270,12 +304,24 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
               child: Row(
                 children: [
                   Container(
+                    width: 150.w,
+                    height: 150.h,
                     clipBehavior: Clip.antiAlias,
                     decoration: const BoxDecoration(shape: BoxShape.circle),
-                    child:
-                        const Image(image: AssetImage('assets/images/4.jpg')),
+                    child: context.select(
+                      (FileController controller) =>
+                          controller.imageByteList4 != null
+                              ? Image.memory(
+                                  controller.imageByteList4!,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  'assets/images/4.jpg',
+                                  fit: BoxFit.cover,
+                                ),
+                    ),
                   ),
-                  const Text(' Compare with std 4 has differences: '),
+                  const Text(' Compare with std 4 has differences:'),
                   Container(
                     margin: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
                     child: Text(
@@ -287,7 +333,7 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
               ),
             ),
 
-            //===============list 5
+            //=======================================list 5
             Container(
               margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
               alignment: Alignment.topLeft,
@@ -298,12 +344,24 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
               child: Row(
                 children: [
                   Container(
+                    width: 150.w,
+                    height: 150.h,
                     clipBehavior: Clip.antiAlias,
                     decoration: const BoxDecoration(shape: BoxShape.circle),
-                    child:
-                        const Image(image: AssetImage('assets/images/5.jpg')),
+                    child: context.select(
+                      (FileController controller) =>
+                          controller.imageByteList5 != null
+                              ? Image.memory(
+                                  controller.imageByteList5!,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                  'assets/images/5.jpg',
+                                  fit: BoxFit.cover,
+                                ),
+                    ),
                   ),
-                  const Text('Compare with std 5 has differences: '),
+                  const Text(' Compare with std 1 has differences:'),
                   Container(
                     margin: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
                     child: Text(
@@ -314,6 +372,7 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                 ],
               ),
             ),
+
             Padding(
                 padding:
                     EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w)),

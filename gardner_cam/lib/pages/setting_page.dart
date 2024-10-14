@@ -1,8 +1,11 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gardner_cam/controller/file_controller.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
@@ -12,7 +15,7 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  void pickImage(String no) async {
+  void pickImage(int no) async {
     XFile? image;
     final picker = ImagePicker();
     image = await picker.pickImage(source: ImageSource.camera);
@@ -21,19 +24,13 @@ class _SettingPageState extends State<SettingPage> {
       final croppedImage = await cropImages(image, no);
 
       if (!mounted) return;
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: ((context) => AnalyzeImage(
-      //           image: croppedImage,
-      //         )),
-      //   ),
-      // );
+      context.read<FileController>().writeImage(croppedImage, no);
+      //FileManager().writeImageFile(croppedImage, no);
     }
   }
 
-  Future<CroppedFile> cropImages(XFile image, String no) async {
-    final croppedFile = await ImageCropper().cropImage(
+  Future<Uint8List> cropImages(XFile image, int no) async {
+    CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: image.path,
       uiSettings: [
         AndroidUiSettings(
@@ -49,12 +46,14 @@ class _SettingPageState extends State<SettingPage> {
         ),
       ],
     );
+    Uint8List imageCroppList = await croppedFile!.readAsBytes();
 
-    return croppedFile!;
+    return croppedFile!.readAsBytes();
   }
 
   @override
   Widget build(BuildContext context) {
+    // updateImage();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Setting App'),
@@ -96,103 +95,309 @@ class _SettingPageState extends State<SettingPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              pickImage('1');
-                            },
-                            child: Stack(children: [
-                              Container(
+                          Stack(children: [
+                            Container(
+                              width: 200.w,
+                              height: 200.h,
+                              clipBehavior: Clip.antiAlias,
+                              decoration:
+                                  const BoxDecoration(shape: BoxShape.circle),
+                              child: context.select(
+                                (FileController controller) =>
+                                    controller.imageByteList1 != null
+                                        ? Image.memory(
+                                            controller.imageByteList1!,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image.asset(
+                                            'assets/images/1.jpg',
+                                            fit: BoxFit.cover,
+                                          ),
+                              ),
+                            ),
+                            Container(
+                                alignment: Alignment.center,
                                 width: 200.w,
                                 height: 200.h,
-                                clipBehavior: Clip.antiAlias,
-                                decoration:
-                                    const BoxDecoration(shape: BoxShape.circle),
-                                child: const Image(
-                                  image: AssetImage('assets/images/1.jpg'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Container(
-                                  alignment: Alignment.center,
-                                  width: 200.w,
-                                  height: 200.h,
-                                  child: const Text(
-                                    '1',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  )),
-                              Container(
+                                child: Text(
+                                  '1',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 80.h,
+                                    shadows: const [
+                                      Shadow(
+                                        color:
+                                            Color.fromARGB(255, 214, 214, 214),
+                                        offset: Offset(1, 1),
+                                        blurRadius: 2,
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                            GestureDetector(
+                              onTap: () {
+                                pickImage(1);
+                              },
+                              child: Container(
                                   alignment: Alignment.bottomRight,
                                   width: 200.w,
                                   height: 200.h,
-                                  child: const Icon(Icons.camera_alt)),
-                            ]),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              pickImage('2');
-                            },
-                            child: Stack(children: [
-                              Container(
+                                  child: const Icon(
+                                    Icons.camera_alt,
+                                    shadows: [
+                                      Shadow(
+                                        color:
+                                            Color.fromARGB(255, 214, 214, 214),
+                                        offset: Offset(2, 1),
+                                        blurRadius: 2,
+                                      ),
+                                    ],
+                                  )),
+                            ),
+                          ]),
+                          /* ============================================================*/
+                          Stack(children: [
+                            Container(
+                              width: 200.w,
+                              height: 200.h,
+                              clipBehavior: Clip.antiAlias,
+                              decoration:
+                                  const BoxDecoration(shape: BoxShape.circle),
+                              child: context.select(
+                                (FileController controller) =>
+                                    controller.imageByteList2 != null
+                                        ? Image.memory(
+                                            controller.imageByteList2!,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image.asset(
+                                            'assets/images/2.jpg',
+                                            fit: BoxFit.cover,
+                                          ),
+                              ),
+                            ),
+                            Container(
+                                alignment: Alignment.center,
                                 width: 200.w,
                                 height: 200.h,
-                                clipBehavior: Clip.antiAlias,
-                                decoration:
-                                    const BoxDecoration(shape: BoxShape.circle),
-                                child: const Image(
-                                  image: AssetImage('assets/images/2.jpg'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Container(
-                                  alignment: Alignment.center,
-                                  width: 200.w,
-                                  height: 200.h,
-                                  child: const Text(
-                                    '2',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  )),
-                              Container(
+                                child: Text(
+                                  '2',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 80.h,
+                                    shadows: const [
+                                      Shadow(
+                                        color:
+                                            Color.fromARGB(255, 214, 214, 214),
+                                        offset: Offset(1, 1),
+                                        blurRadius: 2,
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                            GestureDetector(
+                              onTap: () {
+                                pickImage(2);
+                              },
+                              child: Container(
                                   alignment: Alignment.bottomRight,
                                   width: 200.w,
                                   height: 200.h,
-                                  child: const Icon(Icons.camera_alt)),
-                            ]),
-                          ),
-                          Container(
-                            width: 200.w,
-                            height: 200.h,
-                            clipBehavior: Clip.antiAlias,
-                            decoration:
-                                const BoxDecoration(shape: BoxShape.circle),
-                            child: const Image(
-                              image: AssetImage('assets/images/3.jpg'),
-                              fit: BoxFit.cover,
+                                  child: const Icon(
+                                    Icons.camera_alt,
+                                    shadows: [
+                                      Shadow(
+                                        color:
+                                            Color.fromARGB(255, 214, 214, 214),
+                                        offset: Offset(2, 1),
+                                        blurRadius: 2,
+                                      ),
+                                    ],
+                                  )),
                             ),
-                          ),
-                          Container(
-                            width: 200.w,
-                            height: 200.h,
-                            clipBehavior: Clip.antiAlias,
-                            decoration:
-                                const BoxDecoration(shape: BoxShape.circle),
-                            child: const Image(
-                              image: AssetImage('assets/images/4.jpg'),
-                              fit: BoxFit.cover,
+                          ]),
+                          /* ============================================================*/
+                          Stack(children: [
+                            Container(
+                              width: 200.w,
+                              height: 200.h,
+                              clipBehavior: Clip.antiAlias,
+                              decoration:
+                                  const BoxDecoration(shape: BoxShape.circle),
+                              child: context.select(
+                                (FileController controller) =>
+                                    controller.imageByteList3 != null
+                                        ? Image.memory(
+                                            controller.imageByteList3!,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image.asset(
+                                            'assets/images/3.jpg',
+                                            fit: BoxFit.cover,
+                                          ),
+                              ),
                             ),
-                          ),
-                          Container(
-                            width: 200.w,
-                            height: 200.h,
-                            clipBehavior: Clip.antiAlias,
-                            decoration:
-                                const BoxDecoration(shape: BoxShape.circle),
-                            child: const Image(
-                              image: AssetImage('assets/images/5.jpg'),
-                              fit: BoxFit.cover,
+                            Container(
+                                alignment: Alignment.center,
+                                width: 200.w,
+                                height: 200.h,
+                                child: Text(
+                                  '3',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 80.h,
+                                    shadows: const [
+                                      Shadow(
+                                        color:
+                                            Color.fromARGB(255, 214, 214, 214),
+                                        offset: Offset(1, 1),
+                                        blurRadius: 2,
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                            GestureDetector(
+                              onTap: () {
+                                pickImage(3);
+                              },
+                              child: Container(
+                                  alignment: Alignment.bottomRight,
+                                  width: 200.w,
+                                  height: 200.h,
+                                  child: const Icon(
+                                    Icons.camera_alt,
+                                    shadows: [
+                                      Shadow(
+                                        color:
+                                            Color.fromARGB(255, 214, 214, 214),
+                                        offset: Offset(2, 1),
+                                        blurRadius: 2,
+                                      ),
+                                    ],
+                                  )),
                             ),
-                          ),
+                          ]),
+                          /* ============================================================*/
+                          Stack(children: [
+                            Container(
+                              width: 200.w,
+                              height: 200.h,
+                              clipBehavior: Clip.antiAlias,
+                              decoration:
+                                  const BoxDecoration(shape: BoxShape.circle),
+                              child: context.select(
+                                (FileController controller) =>
+                                    controller.imageByteList4 != null
+                                        ? Image.memory(
+                                            controller.imageByteList4!,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image.asset(
+                                            'assets/images/4.jpg',
+                                            fit: BoxFit.cover,
+                                          ),
+                              ),
+                            ),
+                            Container(
+                                alignment: Alignment.center,
+                                width: 200.w,
+                                height: 200.h,
+                                child: Text(
+                                  '4',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 80.h,
+                                    shadows: const [
+                                      Shadow(
+                                        color:
+                                            Color.fromARGB(255, 214, 214, 214),
+                                        offset: Offset(1, 1),
+                                        blurRadius: 2,
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                            GestureDetector(
+                              onTap: () {
+                                pickImage(4);
+                              },
+                              child: Container(
+                                  alignment: Alignment.bottomRight,
+                                  width: 200.w,
+                                  height: 200.h,
+                                  child: const Icon(
+                                    Icons.camera_alt,
+                                    shadows: [
+                                      Shadow(
+                                        color:
+                                            Color.fromARGB(255, 214, 214, 214),
+                                        offset: Offset(2, 1),
+                                        blurRadius: 2,
+                                      ),
+                                    ],
+                                  )),
+                            ),
+                          ]),
+                          /* ============================================================*/
+                          Stack(children: [
+                            Container(
+                              width: 200.w,
+                              height: 200.h,
+                              clipBehavior: Clip.antiAlias,
+                              decoration:
+                                  const BoxDecoration(shape: BoxShape.circle),
+                              child: context.select(
+                                (FileController controller) =>
+                                    controller.imageByteList5 != null
+                                        ? Image.memory(
+                                            controller.imageByteList5!,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image.asset(
+                                            'assets/images/5.jpg',
+                                            fit: BoxFit.cover,
+                                          ),
+                              ),
+                            ),
+                            Container(
+                                alignment: Alignment.center,
+                                width: 200.w,
+                                height: 200.h,
+                                child: Text(
+                                  '5',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 80.h,
+                                      shadows: const [
+                                        Shadow(
+                                          color: Color.fromARGB(
+                                              255, 214, 214, 214),
+                                          offset: Offset(1, 1),
+                                          blurRadius: 1,
+                                        ),
+                                      ]),
+                                )),
+                            GestureDetector(
+                              onTap: () {
+                                pickImage(5);
+                              },
+                              child: Container(
+                                  alignment: Alignment.bottomRight,
+                                  width: 200.w,
+                                  height: 200.h,
+                                  child: const Icon(
+                                    Icons.camera_alt,
+                                    shadows: [
+                                      Shadow(
+                                        color:
+                                            Color.fromARGB(255, 214, 214, 214),
+                                        offset: Offset(2, 1),
+                                        blurRadius: 2,
+                                      ),
+                                    ],
+                                  )),
+                            ),
+                          ]),
                         ],
                       ),
                     ),

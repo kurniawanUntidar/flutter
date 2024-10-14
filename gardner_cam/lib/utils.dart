@@ -10,6 +10,11 @@ class Utils {
 }
 
 User? lab;
+String stdIm1 = '';
+String stdIm2 = '';
+String stdIm3 = '';
+String stdIm4 = '';
+String stdIm5 = '';
 
 Future<User> readJsonConfig() async {
   final jsonData = await rootBundle.loadString('assets/config.json');
@@ -27,6 +32,6 @@ void writeJsonConfig(String name, String address, String web) {
 
 void UpdateFromJson() {
   readJsonConfig().then((value) {
-    // lab = value;
+    lab = value;
   });
 }
