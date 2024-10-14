@@ -31,10 +31,10 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: Container(
           padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 100.w),
-          margin: EdgeInsets.symmetric(horizontal: 100.w, vertical: 20.h),
+          margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100.r),
-            color: const Color.fromARGB(135, 245, 218, 218),
+            borderRadius: BorderRadius.circular(50.r),
+            color: const Color.fromARGB(255, 245, 233, 191),
           ),
           child: ListView(
             children: [

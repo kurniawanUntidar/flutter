@@ -171,8 +171,11 @@ class _MainPageState extends State<MainPage> {
 
       //************************************************************************/
       body: Container(
-        margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-        color: Color.fromARGB(255, 245, 233, 191),
+        margin: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50.r),
+          color: const Color.fromARGB(255, 245, 233, 191),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

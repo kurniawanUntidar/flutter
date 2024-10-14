@@ -63,10 +63,10 @@ class _SettingPageState extends State<SettingPage> {
       ),
       body: Container(
           //padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
-          margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+          margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(60.r),
+            borderRadius: BorderRadius.circular(50.r),
             color: const Color.fromARGB(255, 245, 233, 191),
           ),
           child: ListView(
