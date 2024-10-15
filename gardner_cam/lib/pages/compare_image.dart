@@ -138,11 +138,11 @@ Future<String> compare(CroppedFile imageToCompare, int stdNo) async {
 
   List<int> imageBase64 = await imageToCompare.readAsBytes();
 
-  var chiSquareDistace = await compareImages(
+  var colorDistace = await compareImages(
       src1: decodeImage(imageBase64),
       src2: decodeImage(stdBytes),
       algorithm: EuclideanColorDistance(ignoreAlpha: true));
-  double retval = chiSquareDistace * 100;
+  double retval =100-(colorDistace * 100);
 
   // print('Chi Square Histogram difference : ${chiSquareDistace * 100}%');
   return retval.toStringAsPrecision(4);

@@ -148,37 +148,68 @@ class PdfInvoiceApi {
     double dif4 = double.parse(invoice.items[3].differences);
     double dif5 = double.parse(invoice.items[4].differences);
 
-    ReportItem minimal;
-    double valMin;
+    //ReportItem minimal;
+    ReportItem maximal;
+    //double valMin;
+    double valMax;
 
-    if (dif1 > dif2) {
-      minimal = invoice.items[1];
-      valMin = double.parse(minimal.differences);
+    if (dif1 < dif2) {
+      maximal = invoice.items[1];
+      valMax = double.parse(maximal.differences);
     } else {
-      minimal = invoice.items[0];
-      valMin = double.parse(minimal.differences);
+      maximal = invoice.items[0];
+      valMax = double.parse(maximal.differences);
     }
-    if (valMin > dif3) {
-      minimal = invoice.items[2];
-      valMin = double.parse(minimal.differences);
+    if (valMax < dif3) {
+      maximal = invoice.items[2];
+      valMax = double.parse(maximal.differences);
     } else {
-      minimal = minimal;
-      valMin = double.parse(minimal.differences);
+      maximal = maximal;
+      valMax = double.parse(maximal.differences);
     }
-    if (valMin > dif4) {
-      minimal = invoice.items[3];
-      valMin = double.parse(minimal.differences);
+    if (valMax < dif4) {
+      maximal = invoice.items[3];
+      valMax = double.parse(maximal.differences);
     } else {
-      minimal = minimal;
-      valMin = double.parse(minimal.differences);
+      maximal = maximal;
+      valMax = double.parse(maximal.differences);
     }
-    if (valMin > dif5) {
-      minimal = invoice.items[4];
-      valMin = double.parse(minimal.differences);
+    if (valMax < dif5) {
+      maximal = invoice.items[4];
+      valMax = double.parse(maximal.differences);
     } else {
-      minimal = minimal;
-      valMin = double.parse(minimal.differences);
+      maximal = maximal;
+      valMax = double.parse(maximal.differences);
     }
+
+    // if (dif1 > dif2) {
+    //   minimal = invoice.items[1];
+    //   valMin = double.parse(minimal.differences);
+    // } else {
+    //   minimal = invoice.items[0];
+    //   valMin = double.parse(minimal.differences);
+    // }
+    // if (valMin > dif3) {
+    //   minimal = invoice.items[2];
+    //   valMin = double.parse(minimal.differences);
+    // } else {
+    //   minimal = minimal;
+    //   valMin = double.parse(minimal.differences);
+    // }
+    // if (valMin > dif4) {
+    //   minimal = invoice.items[3];
+    //   valMin = double.parse(minimal.differences);
+    // } else {
+    //   minimal = minimal;
+    //   valMin = double.parse(minimal.differences);
+    // }
+    // if (valMin > dif5) {
+    //   minimal = invoice.items[4];
+    //   valMin = double.parse(minimal.differences);
+    // } else {
+    //   minimal = minimal;
+    //   valMin = double.parse(minimal.differences);
+    // }
     // final netTotal = invoice.items
     //     .map((item) => item.unitPrice * item.quantity)
     //     .reduce((item1, item2) => item1 + item2);
@@ -197,8 +228,8 @@ class PdfInvoiceApi {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 buildText(
-                  title: 'Lowest Differences :',
-                  value: '$valMin %',
+                  title: 'Highest Similarity :',
+                  value: '$valMax %',
                   unite: true,
                 ),
                 Divider(),
@@ -208,7 +239,7 @@ class PdfInvoiceApi {
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
-                  value: minimal.no,
+                  value: maximal.no,
                   unite: true,
                 ),
                 SizedBox(height: 2 * PdfPageFormat.mm),

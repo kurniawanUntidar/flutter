@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gardner_cam/controller/file_controller.dart';
 import 'package:gardner_cam/pages/main_page.dart';
+import 'package:provider/provider.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // for (int i = 1; i < 6; i++) {
+    //   context.read<FileController>().readImage(i);
+    // }
     return Scaffold(
       body: Container(
         //color: Color.fromARGB(255, 230, 214, 214),

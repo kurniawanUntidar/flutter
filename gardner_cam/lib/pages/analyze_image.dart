@@ -88,8 +88,8 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
       // ),
 
       customer: const Customer(
-        name: 'Nama User',
-        address: 'Alamat user',
+        name: '',
+        address: '',
       ),
       info: ReportInfo(
         date: date,
@@ -101,27 +101,27 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
         ReportItem(
             no: '1',
             description:
-                'Compare With Standard Color Number 1 has differences :',
+                ' Compare to standard color 1st has similarities:',
             differences: val1),
         ReportItem(
             no: '2',
             description:
-                'Compare With Standard Color Number 2 has differences :',
+                ' Compare to standard color 2nd has similarities:',
             differences: val2),
         ReportItem(
             no: '3',
             description:
-                'Compare With Standard Color Number 3 has differences :',
+                ' Compare to standard color 3rd has similarities:',
             differences: val3),
         ReportItem(
             no: '4',
             description:
-                'Compare With Standard Color Number 4 has differences :',
+                ' Compare to standard color 4th has similarities:',
             differences: val4),
         ReportItem(
             no: '5',
             description:
-                'Compare With Standard Color Number 5 has differences :',
+                ' Compare to standard color 5th has similarities:',
             differences: val5),
       ],
     );
@@ -141,7 +141,7 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
           foregroundColor: Colors.white,
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Center(
               child: Container(
@@ -175,13 +175,14 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                     EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w)),
             //=======================================list 1
             Container(
-              margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
+              margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 10.w),
               alignment: Alignment.topLeft,
               padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
               decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 241, 216, 144),
                   borderRadius: BorderRadius.circular(12.r)),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     width: 150.w,
@@ -201,9 +202,9 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                                 ),
                     ),
                   ),
-                  const Text(' Compare with std 1 has differences:'),
+                  const Text('With 1st color std has similarities:'),
                   Container(
-                    margin: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 0, 20.w, 0),
                     child: Text(
                       '$val1%',
                       style: const TextStyle(fontWeight: FontWeight.bold),
@@ -222,6 +223,7 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                   color: const Color.fromARGB(255, 241, 216, 144),
                   borderRadius: BorderRadius.circular(12.r)),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     width: 150.w,
@@ -241,9 +243,9 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                                 ),
                     ),
                   ),
-                  const Text(' Compare with std 2 has differences:'),
+                  const Text('With 2nd color std has similarities:'),
                   Container(
-                    margin: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 0, 20.w, 0),
                     child: Text(
                       '$val2%',
                       style: const TextStyle(fontWeight: FontWeight.bold),
@@ -262,6 +264,7 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                   color: const Color.fromARGB(255, 241, 216, 144),
                   borderRadius: BorderRadius.circular(12.r)),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     width: 150.w,
@@ -281,9 +284,9 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                                 ),
                     ),
                   ),
-                  const Text(' Compare with std 3 has differences:'),
+                  const Text('With 3rd color std has similarities:'),
                   Container(
-                    margin: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 0, 20.w, 0),
                     child: Text(
                       '$val3%',
                       style: const TextStyle(fontWeight: FontWeight.bold),
@@ -302,6 +305,7 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                   color: const Color.fromARGB(255, 241, 216, 144),
                   borderRadius: BorderRadius.circular(12.r)),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     width: 150.w,
@@ -321,9 +325,9 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                                 ),
                     ),
                   ),
-                  const Text(' Compare with std 4 has differences:'),
+                  const Text('With 4th color std has similarities:'),
                   Container(
-                    margin: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 0, 20.w, 0),
                     child: Text(
                       '$val4%',
                       style: const TextStyle(fontWeight: FontWeight.bold),
@@ -342,6 +346,7 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                   color: const Color.fromARGB(255, 241, 216, 144),
                   borderRadius: BorderRadius.circular(12.r)),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     width: 150.w,
@@ -361,9 +366,9 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                                 ),
                     ),
                   ),
-                  const Text(' Compare with std 1 has differences:'),
+                  const Text('With 5th color std has similarities:'),
                   Container(
-                    margin: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 0, 20.w, 0),
                     child: Text(
                       '$val5%',
                       style: const TextStyle(fontWeight: FontWeight.bold),

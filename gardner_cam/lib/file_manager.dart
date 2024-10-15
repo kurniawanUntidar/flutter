@@ -181,7 +181,7 @@ class FileManager {
     return image;
   }
 
-  Future<Uint8List> readImageFile(int std) async {
+  Future<Uint8List?> readImageFile(int std) async {
     //File file = await _imageFile;
     File file = await _imageFile1;
     switch (std) {
@@ -207,12 +207,13 @@ class FileManager {
     if (await file.exists()) {
       try {
         byteList = await file.readAsBytes();
+        return byteList;
       } catch (e) {
         print(e);
+        return null;
       }
     }
-
-    return byteList!;
+    //return byteList!;
   }
 
   cekImageFile() async {
@@ -224,33 +225,38 @@ class FileManager {
     if (await file1.exists() == false) {
       ByteData data = await rootBundle.load('assets/images/1.jpg');
       Uint8List byteList = data.buffer.asUint8List();
-      await file1.writeAsBytes(byteList);
+       await file1.writeAsBytes(byteList);
+       //file1.writeAsBytesSync(byteList);
     }
     if (await file2.exists() == false) {
       ByteData data = await rootBundle.load('assets/images/2.jpg');
       Uint8List byteList = data.buffer.asUint8List();
       await file2.writeAsBytes(byteList);
+      //file2.writeAsBytesSync(byteList);
     }
     if (await file3.exists() == false) {
       ByteData data = await rootBundle.load('assets/images/3.jpg');
       Uint8List byteList = data.buffer.asUint8List();
       await file3.writeAsBytes(byteList);
+      //file3.writeAsBytesSync(byteList);
     }
     if (await file4.exists() == false) {
       ByteData data = await rootBundle.load('assets/images/4.jpg');
       Uint8List byteList = data.buffer.asUint8List();
       await file4.writeAsBytes(byteList);
+      //file4.writeAsBytesSync(byteList);
     }
     if (await file5.exists() == false) {
       ByteData data = await rootBundle.load('assets/images/5.jpg');
       Uint8List byteList = data.buffer.asUint8List();
       await file5.writeAsBytes(byteList);
+      //file5.writeAsBytesSync(byteList);
     }
-    // stdIm1 = file1.path;
-    // stdIm2 = file2.path;
-    // stdIm3 = file3.path;
-    // stdIm4 = file4.path;
-    // stdIm5 = file5.path;
+    stdIm1 = file1.path;
+    stdIm2 = file2.path;
+    stdIm3 = file3.path;
+    stdIm4 = file4.path;
+    stdIm5 = file5.path;
   }
 
   // deleteImage() async {

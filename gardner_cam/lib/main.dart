@@ -15,9 +15,7 @@ void main() => runApp(
 class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("Start Up");
     FileManager().startUp();
-    print("Image path:");
     FileManager().cekImageFile();
     for (int i = 1; i < 6; i++) {
       context.read<FileController>().readImage(i);
