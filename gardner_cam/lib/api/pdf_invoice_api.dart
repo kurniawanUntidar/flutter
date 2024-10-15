@@ -67,15 +67,12 @@ class PdfInvoiceApi {
 
   static Widget buildInvoiceInfo(ReportInfo info) {
     //final paymentTerms = '${info.dueDate.difference(info.date).inDays} days';
-    final titles = <String>[
-      'Report Number:',
-      'Test Date:',
-      'Light Intensity (lux):'
-    ];
+    final titles = <String>['Report Number:', 'Test Date:', 'Light Intensity:'];
     final data = <String>[
       info.number,
       Utils.formatDate(info.date),
-      Utils.formatDate(info.dueDate),
+      '500 lux'
+      //Utils.formatDate(info.dueDate),
     ];
 
     return Column(

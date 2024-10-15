@@ -8,6 +8,7 @@ import 'package:gardner_cam/api/pdf_invoice_api.dart';
 import 'package:gardner_cam/controller/file_controller.dart';
 import 'package:gardner_cam/model/customer.dart';
 import 'package:gardner_cam/model/report.dart';
+import 'package:gardner_cam/model/user.dart';
 import 'package:gardner_cam/pages/compare_image.dart';
 import 'package:gardner_cam/pages/main_page.dart';
 import 'package:gardner_cam/utils.dart';
@@ -100,28 +101,23 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
       items: [
         ReportItem(
             no: '1',
-            description:
-                ' Compare to standard color 1st has similarities:',
+            description: ' Compare to standard color 1st has similarities:',
             differences: val1),
         ReportItem(
             no: '2',
-            description:
-                ' Compare to standard color 2nd has similarities:',
+            description: ' Compare to standard color 2nd has similarities:',
             differences: val2),
         ReportItem(
             no: '3',
-            description:
-                ' Compare to standard color 3rd has similarities:',
+            description: ' Compare to standard color 3rd has similarities:',
             differences: val3),
         ReportItem(
             no: '4',
-            description:
-                ' Compare to standard color 4th has similarities:',
+            description: ' Compare to standard color 4th has similarities:',
             differences: val4),
         ReportItem(
             no: '5',
-            description:
-                ' Compare to standard color 5th has similarities:',
+            description: ' Compare to standard color 5th has similarities:',
             differences: val5),
       ],
     );
@@ -398,6 +394,10 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                       MaterialPageRoute(builder: (context) => MainPage()));
                 },
                 label: const Text('Back  Home')),
+
+            Padding(
+                padding:
+                    EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w)),
           ],
         ));
   }
