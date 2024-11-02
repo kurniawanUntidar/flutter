@@ -171,7 +171,7 @@ class _AnalyzeImageState extends State<AnalyzeImage> {
                     EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w)),
             //=======================================list 1
             Container(
-              margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 10.w),
+              margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
               alignment: Alignment.topLeft,
               padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
               decoration: BoxDecoration(
