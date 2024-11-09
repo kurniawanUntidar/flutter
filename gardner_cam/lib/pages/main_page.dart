@@ -149,23 +149,23 @@ class _MainPageState extends State<MainPage> {
                         MaterialPageRoute(
                             builder: (context) => const SettingPage()));
                   }),
-              ListTile(
-                  leading: const Icon(
-                    Icons.help_center,
-                    color: Colors.white,
-                  ),
-                  title: const Text(
-                    'H E L P',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HelpPage()));
-                  })
+              // ListTile(
+              //     leading: const Icon(
+              //       Icons.help_center,
+              //       color: Colors.white,
+              //     ),
+              //     title: const Text(
+              //       'H E L P',
+              //       style: TextStyle(
+              //           color: Colors.white, fontWeight: FontWeight.bold),
+              //     ),
+              //     onTap: () {
+              //       Navigator.pop(context);
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (context) => const HelpPage()));
+              //     })
             ],
           )),
 
